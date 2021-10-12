@@ -51,15 +51,17 @@ Triangular inequality | `Dist(x,y) + Dist(y,z) =/= Dist(z,x)`
 - Mean Absolute Error
 - Root Relative Squared Error
 - Coefficient of determination (R<sup>2</sup>)
-### Classification Problems
-Misclassification
+### Classification Problems: Misclassification - Is the cost of one type of error higher than another?
 - Sensitivity: what proportion of the true positives have we missed? `TP/(TP+FN)`
 - Specificity: what proportion of the true negatives have we correctly identified? `TN/(TN+FP)`
 - Receiver Operator Curves, ROC: TP relative to FP
-    + ![Screenshot (1140)](https://user-images.githubusercontent.com/80669114/137035836-91e820d0-4a12-4ac3-87b7-61137f3a024a.png)
-    + ![Screenshot (1141)](https://user-images.githubusercontent.com/80669114/137035926-98c481c7-5839-4265-982e-8735a0fd38c5.png)
 
-Which of these matter more? Is the cost of one type of error higher than another?
+No overlap, so no misclassification | Some overlap and misclassification
+------------------------------------|--------------
+![Screenshot (1140)](https://user-images.githubusercontent.com/80669114/137035836-91e820d0-4a12-4ac3-87b7-61137f3a024a.png) | ![Screenshot (1141)](https://user-images.githubusercontent.com/80669114/137035926-98c481c7-5839-4265-982e-8735a0fd38c5.png)
+
+
+
 
 ### Cross Validation
 ### Boostrapping
