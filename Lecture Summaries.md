@@ -60,9 +60,6 @@ No overlap, so no misclassification | Some overlap and misclassification
 ------------------------------------|--------------
 ![Screenshot (1140)](https://user-images.githubusercontent.com/80669114/137035836-91e820d0-4a12-4ac3-87b7-61137f3a024a.png) | ![Screenshot (1141)](https://user-images.githubusercontent.com/80669114/137035926-98c481c7-5839-4265-982e-8735a0fd38c5.png)
 
-
-
-
 ### Cross Validation
 ### Boostrapping
 
@@ -114,7 +111,8 @@ This has the effect of placing more emphasis on significant events and recent ev
 Each individual is a fixed length reprentation of values that inform a strategy relating to a scoring heuristic. _"Most fit"_ individuals reproduce and push out _"less fit"_ individuals, promoting successful strategies, mimicing real world evolution.
 
 ### Fitness:
-Fitness is defined as how well an agent's parameters allow it to solve the problem.
+Fitness is defined as how well an agent's parameters allow it to solve the problem. 
+A way of defining the fitness of a given individual is required to run and train a genetic algorithm. This is typically done as a "fitness function", evaluated at the end of a generation/epoch. 
 
     Initialisation 
     |   
@@ -129,11 +127,14 @@ Fitness is defined as how well an agent's parameters allow it to solve the probl
 - steady state: newly created individuals replace single instance from within the population.
 
 ### Selection processes:
-- Methods: proportional selection, tournament, ranked...
+Methods: 
+- __proportional selection:__ each individual is given a proportional chance of being selected, defined by it's fitness relative to the population's net fitness. `probSelection(i) = fitness(i)/sum(fitness(population))`
+- __tournament:__ randomly select N individuals from the population and place them in a "pool". From that pool, we select the fittest individual and pass them forward into the next generation.
+- __ranked:__ order the population by fitness. Parents are then selected from an upper proportion of this ranked list.
 
 All selection methods are designed to create a biased selection criteria, biased towards selecting _"fitter"_ individuals over _"less fit"_ individuals.
 
-### Crossover and mutation:
+### Crossover "recombination" and mutation:
 New instances are created by combining the values of multiple parents, and then subsequently applying mutation.
 Crossover strategies | Specification
 ---------------------|-------------------
@@ -145,17 +146,21 @@ __Mutation:__ modifying the values of specific genes within an organism, based o
 Can be changed to a random value, or to within a range of the original value 
 
 ### Issues with Genetic Algorithms
-- This approach needs dynamic problems to be effective. It's very poor on simple regression and classification problems.
-- Premature stabilisation/convergence: The selection processes will naturally push the population state to stability, thus requiring the mutation parameter to prevent convergence before a solution is found.
+- This approach needs dynamic problems to be effective. It's very poor on (logistic) regression and classification problems, as it needs to be able to assess the quality of the solution.
+- __Premature stabilisation/convergence:__ The selection processes will naturally push the population state to stability, thus requiring the mutation parameter to prevent convergence before a solution is found.
 - Genetic Algorithms are not ensured to reach an optimal solution
+- __Drift:__ Given children are created from randomly selected parents, there is a chance for stochasticly induced drift away from optimal behaviour. Ideally, the fitness function should limit this, eliminating the _unfit_ individuals and rewarding a return to _fitter_ behaviour. 
+- They're very slow, the random initialised behaviour, random selection, and lack of a strict gradient curve to move along means these algorithms can take a long time to convergence, if they do at all.
+- As it's a random process, it's not directly reproducible, and small changes to random states and inital params can have a significant effect on the final outcome.
 
 ### Assets of Genetic Algorithms
 - Genetic Algorithms doesnt require a defined gradient/cost surface to be described before hand
 - Genetic Algorithms are a highly flexible general purpose architecture
-- It is highly applicable to complex multivariable environments
+- Genetic algorithm still function under unoptimised hyperparameters, it's fairly robust, it just won't be as efficent as it could be
+- It is highly applicable to complex multivariable environments, where bruteforce search methods and are slow and expensive.
 
 # Genetic Programming:
-
+Mutating computed parameters of a fitted function and selecting those subversions that worked better. Effectively a hill climbing algorithm, where it can't see the hill
 # Linear Regression
 ### MLR
 
