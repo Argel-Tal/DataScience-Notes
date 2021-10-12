@@ -108,6 +108,9 @@ This has the effect of placing more emphasis on significant events and recent ev
 - Seasonal: S<sub>t</sub> = Lambda (y<sub>t</sub> - (l<sub>t-1</sub>) - (b<sub>t-1</sub>)) + (1 - lambda) * S<sub>t-m</sub>, where `m` is the seasonal period
 
 # Genetic Algorithms
+### Evolutionary Strategies
+Mutating computed parameters of a fitted function and selecting those subversions that worked better. Effectively a hill climbing algorithm, where it can't see the hill
+
 Each individual is a fixed length reprentation of values that inform a strategy relating to a scoring heuristic. _"Most fit"_ individuals reproduce and push out _"less fit"_ individuals, promoting successful strategies, mimicing real world evolution.
 
 ### Fitness:
@@ -160,7 +163,29 @@ Can be changed to a random value, or to within a range of the original value
 - It is highly applicable to complex multivariable environments, where bruteforce search methods and are slow and expensive.
 
 # Genetic Programming:
-Mutating computed parameters of a fitted function and selecting those subversions that worked better. Effectively a hill climbing algorithm, where it can't see the hill
+### Genetic Programming: Trees
+Rather than having a fixed length reprentation (_chromosome_), tree-type genetic programming uses a variable length decision tree type structure to solve a problem. 
+
+These have two fitness attributes:
+- __Traditional fitness:__ accuracy of solution
+- __Efficency:__ how long is the solution _"parismony"_
+
+Evolutionary principles thus happen on the candidate programs themselves (the solution trees).
+- Crossover is achieved by swapping branches of the various trees.
+- Mutation is done by deleting and growing branches.
+
+### Steps to Genetic Programming:
+1. Define a set of terminals (explanatory variables and random constants)
+2. Define a set of primative functions to be used within each branch 
+3. Define a fitness function
+4. Set hyperparameters
+5. Set a termination criteria and a return structure, so you can get the solution(s) back out.
+
+### Motivations of Genetic Programming:
+- When explantory variables are interconnected in an unknown way
+- When an approximate solution is sufficient _(always makes me uncomfortable, these tend to be the most permenant)_
+- Areas where a solution architecture is unknown and undefined, but a fitness measure is defined.
+
 # Linear Regression
 ### MLR
 
