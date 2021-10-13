@@ -79,11 +79,24 @@ We want to maximise the information gain that occurs at every itterative stage: 
 
 ### Aggregate Models:
 #### Bagging
+Bootstrap aggregation, averaging a set of observations to reduce the variation in the model.
+- regression: take the average
+- Classification: apply the majority label (plurality)
+
+We take B bootstrapped versions of the dataset from our training dataset, and build a decision tree on each. This produces B trees.
+While this boosts preformance, we loose the advantage of trees being easy to interpret
 
 #### Boosting
+Growing many small trees that act in sequence, with each tree reducing the residual error passed to it from the previous tree. Each of these trees have a highly limited max depth.
+
+A learning rate `λ` is applied, enforcing how much of the previous tree is remembered when it's passed to the next tree (typically inversely proportional to the number of trees `B`)
+
+Additionally, differnet trees can be given weights to different misclassification error types, such that different trees are penalised for failing to correctly classify different classes differently.
 
 #### Random Forest
+Bootstrapping both the instances __AND__ the variables available to each of the trees within the forest B, essentially an upgraded version of __bagging__.
 
+These trees only consider a subset of the variables at each split, reducing the options they have available (available predictors labelled `m`, from all predictors `p`).
 
 # Time Series
 ### Univariate data, "signal", what does this give us? 
