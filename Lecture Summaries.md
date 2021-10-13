@@ -20,8 +20,11 @@ Documents the purpose, limitations, units and sourcing of the dataset.
 ### Transformations:
 - Scaling of the dataset (typically mean = 0 and standard deviation = 1)
 - Time series: component vector transformations, through Fourier Transformations
-- Log transformations
-- Dimension reduction
+- Log transformations: pushing non-linear variables onto linear scales
+- Dimension reduction: has it's own selection
+
+# Dimension Reduction
+
 
 # Clustering 
 ### Similarity:
