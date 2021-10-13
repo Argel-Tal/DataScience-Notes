@@ -86,10 +86,12 @@ We want to maximise the information gain that occurs at every itterative stage: 
 
 
 # Time Series
-### Univariate data, what does this give us? 
+### Univariate data, "signal", what does this give us? 
 - differences
-- return periods
-- seasonal trends
+- return periods: times between a repeated event
+- General trend: long term direction of the variable's values
+- seasonal patterns: a predictable length period where a regular pattern of change occurs (weekly, summer vs winter...)
+- Cyclic patterns: similar changes to the variable's values, where those changes aren't over regular intervals/lengths (economic recessions)
 - anomaly detection
 - summary statistics (mean, var, min, ...)
 
@@ -97,15 +99,64 @@ We want to maximise the information gain that occurs at every itterative stage: 
 - Correlated factors and external event data
 - No explanatories; we only have the response variable
 
-### Exponential Smoothing:
+### Additive Model
+Where the magnitude of the seasonal variation or variation around the trend __does not__ change with the raw value of the timeseries
+
+__Level value:__ y<sub>t</sub> = S<sub>t</sub> + T<sub>t</sub> + E<sub>t</sub>
+
+__Seasonally adjusted value:__ removing the influence of the season pattern, to see how the overall trend is changing, independant of those seasonal effects: y<sub>t</sub> - S<sub>t</sub>
+
+variable      | description 
+--------------|-----------------
+y<sub>t</sub> | time series value
+S<sub>t</sub> | seasonal component
+T<sub>t</sub> | general trend
+E<sub>t</sub> | error/noise
+
+### Multiplicative Model
+Where the magnitude of the seasonal variation or variation around the trend __changes__ proportion to the raw value of the timeseries.
+
+__Level value:__ y<sub>t</sub> = S<sub>t</sub> * T<sub>t</sub> * E<sub>t</sub>
+
+__Seasonally adjusted value:__ y<sub>t</sub>/S<sub>t</sub>
+
+### Moving Average:
+T<sub>t</sub> = 1/m * sum(y<sub>t+j</sub>), where `m = 2k + 1`
+
+An estimate of the level at time `t`, is obtained by averaging values of the timeseries within `k` periods of `t`.
+
+This somewhat smoothes out the random noise within the dataset.
+
+### STL decomposition:
+A version of additive model decomposition that allows for seasonal periods to change in size, meaning we're not limited to "real world periods" like months or days.
+
+### Exponential Smoothing, kNN for Timeseries:
 Weights are given to all instances, and these weights decrease as the distance as the instance gets older (inversely proportional to difference between instance and most recent instance), at an exponential rate.
 
 This has the effect of placing more emphasis on significant events and recent events.
 
 ### Equations
-- Level: l<sub>t</sub> = alpha(Y<sub>t</sub> - S<sub>t</sub> - m) + (1- alpha) * (l<sub>t</sub> + b<sub>t-1</sub>)
-- Trend: b<sub>t</sub> = B<sub>t</sub> (l<sub>t</sub> - l<sub>t-1</sub>) - (1 - B) * b<sub>t-1</sub>
-- Seasonal: S<sub>t</sub> = Lambda (y<sub>t</sub> - (l<sub>t-1</sub>) - (b<sub>t-1</sub>)) + (1 - lambda) * S<sub>t-m</sub>, where `m` is the seasonal period
+__Holt-Winter's additive method:__
+variable | equation | description
+---------|----------|-----
+estimated value | y<sub>t+h\|t</sub> = l<sub>t</sub> + h*b<sub>t</sub> + s<sub>t+h-m(k+1)</sub> |
+Level | l<sub>t</sub> = α(Y<sub>t</sub>-S<sub>t</sub>-m) + (1-α) * (l<sub>t</sub>+b<sub>t-1</sub>) | weighted average between the seasonally adjusted observation, and the non-seasonal forcast
+Trend | b<sub>t</sub> = B<sub>t</sub> * (l<sub>t</sub>-l<sub>t-1</sub>) - (1-B) * b<sub>t-1</sub> | weighted average of the estimate trend at `t`based on previous estimates of the trend
+Seasonal | S<sub>t</sub> = `γ` (y<sub>t</sub> - (l<sub>t-1</sub>) - (b<sub>t-1</sub>)) + (1-`γ`) * S<sub>t-m</sub>, where `m` is the seasonal period and `γ` is the seasonal smoothing parameter | weighted average between the current seasonal index and the seasonal index of the same season last time 
+
+__Autoregressive prediction:__ using the variable's past values to predict it's future values.
+
+y<sub>t</sub> = c + Φ<sub>1</sub>y<sub>t-1</sub> + Φ<sub>2</sub>y<sub>t-2</sub> + ... + Φ<sub>p</sub>y<sub>t-p</sub> + E<sub>t</sub>, where p is the amount of previous instances we're using to predict future values.
+
+__Autoregressive moving averages__ use forecast errors instead of levels:
+
+y<sub>t</sub> = c + E<sub>t</sub> + θ<sub>1</sub>E<sub>t-1</sub> + θ<sub>2</sub>E<sub>t-2</sub> + ... + θ<sub>q</sub>E<sub>t-q</sub>
+
+__Auto Regressive Intergrated Moving Average (ARIMA) models__:
+
+Combining both the autoregressive model and the moving average created by the error terms:
+
+y'<sub>t</sub> = c + Φ<sub>1</sub>y<sub>t-1</sub> + ... + Φ<sub>p</sub>y<sub>t-p</sub> + θ<sub>1</sub>E<sub>t-1</sub> + ... + θ<sub>q</sub>E<sub>t-q</sub> + E<sub>t</sub>
 
 # Genetic Algorithms
 ### Evolutionary Strategies
