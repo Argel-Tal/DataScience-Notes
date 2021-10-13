@@ -25,9 +25,9 @@ Documents the purpose, limitations, units and sourcing of the dataset.
 
 # Clustering 
 ### Similarity:
-A measure of how different any two points are to each other, typically interpretted and determined through distance metrics
+A measure of how different any two points are to each other, typically interpretted and determined through __distance metrics__
 
-Typically requires the data to be scaled, such that all numeric values are on the same scale. 
+Typically requires the data to be scaled, such that all numeric values are on the same scale, normally to either `N(mean = 0, sd = 1)` or `[0:1]` for non-negative data. 
 
 ### Feature creation:
 Using the important features, we can create new variables that can be leveraged in clustering processes, or analysing the parameters of the clusters.
@@ -38,6 +38,68 @@ Requirement          | Equation
 Equality of distance | `Dist(x,y) == Dist(y,x)`
 Difference in values means distance in space | `Dist(x,y) =/= 0`, if `x=/=y`
 Triangular inequality | `Dist(x,y) + Dist(y,z) =/= Dist(z,x)`
+
+### kMeans
+kMeans is a radial clustering algorithm centred around grouping points around an artifical cluster point (of which there are `k`). 
+
+1. `k` Clusters are randomly intialised
+2. Instances are allocated to one of the `k` clusters. 
+3. Clustering points are placed at the mean (centre) of the instances allocated to them.
+4. Points are reassigned to the cluster point they are closest to
+5. This is then repeated till the algorithm stabilises.
+
+__Drawbacks of kMeans__
+- As this is a radially defined algorithm, it preforms poorly on shaped clusters
+- `k` has be to specified apriori, meaning we need to run a number of trails at different levels of `k`
+- As `kMeans works in all dimensions, and doesn't do dimension reduction, it can be prone to the issues of working in high dimensional space.
+
+### Dendrograms
+Dendrograms are a clustering tree, where _like_ instances are grouped into _nodes_, which are then merge with other nodes.
+
+The linkage metric can dramatically impact the structure of the resultant tree
+Linkage type    | Description
+----------------|-------------
+Complete        | mimimises the furthest distance possible from the two nodes' values (min of A, max of B)
+Average         | mimimises the difference in average (mean) value of each node
+Minimum         | mimimises the difference in minimum value of each node
+Maximum         | mimimises the difference in minimum value of each node
+Ward             | minimises the sum of squares variance increase when two clusters are merged
+
+### Kohonen Self Organising Maps (SOMs)
+Visually storing similiar items together, designed to replicate neurological structuring patterns.
+
+The SOM is a set of neurons, organised within a space (i.e. a position on a 2D plane), where there are is a neuron for each instance, comprised of a vector of weight values, corresponding to each variable. `shape(SOM) == shape(matrix[n,p])`
+__Process__
+
+1. Each instance is matched to a neuron
+2. Update the neuron to be more like the matched instance, as defined by the learning rate
+3. Update the surrounding neurons to be more like the matched instance of their shared neighbour, as defined by the neighbourhood size
+4. reduce the learning rate: `lr`
+5. reduce the neighbourhood size `influence with respect to distance betwen neurons: θ`
+
+        [init] [init] [init]
+        [init] [init] [init]
+        [init] [init] [init]
+             |
+             ↓
+        [init] [      init     ] [init]
+        [init] [Δ0 d/d instance] [init]
+        [init] [      init     ] [init]
+             |
+             ↓
+        [Δ d/dΔ0] [Δ d/dΔ0] [Δ d/dΔ0]
+        [Δ d/dΔ0] [   Δ0  ] [Δ d/dΔ0]
+        [Δ d/dΔ0] [Δ d/dΔ0] [Δ d/dΔ0]
+
+__neuron update rule:__ 
+`w(t+1) = w(t) + θ(t) * lr(t) * (v(t) – w(t))`
+
+At model start, the high `lr` and `θ` will mean neurons are changing highly to match instances, and also changing to respect far away points, which have a high influence on them.
+
+In later epochs, neurons will be more resistant to change, with both instance values and neighbouring neurons exerting little influence on a neuron.
+
+__Purpose of SOMs__
+SOMs provide a way of visualising which instances tend to cluster together, suggesting a similarity of variable values.
 
 # Measuring supervised model preformance
 ### Components of model assessments:
