@@ -24,7 +24,27 @@ Documents the purpose, limitations, units and sourcing of the dataset.
 - Dimension reduction: has it's own selection
 
 # Dimension Reduction
+### PCA
+__Motivations:__
+- Reduce the number of dimensions
+- Ensure the variables are independent of each other
 
+__General Principal:__
+The new axes, the principle components, are linear combinations of the original variables, such that the variance of the principal components decreases with each subsequent component and that all components are uncorrelated.
+
+Variables are standardised and centered to _N(mean = 0, sd = 1)_
+
+From the `sum(var(principal components[Z]))`, we can see how much of the dataset's variance is explained, i.e. 
+- "_the first two principal components account for 88% of the variability in the data; the first three principal components account for 97% of the variability_" 
+
+Typically, the variance explained will decrease with each subsequent component, until it flatlines with no furter improvements to the amount of variation explained, producing an _"elbow plot"_
+
+__Loadings:__
+Z<sup>1</sup> = a<sub>1,1</sub>X<sub>1</sub> + a<sub>1,2</sub>X<sub>2</sub> + ... + a<sub>1,p</sub>X<sub>p</sub> where a values are the _loadings_ associated with each variable within that principal component. 
+
+These _loadings_ are selected to minimise var(Z<sub>1</sub>), and such that a<sup>2</sup><sub>1,1</sub> + a<sup>2</sup><sub>1,2</sub> + ... + a<sup>2</sup><sub>1,p</sub> = 1. The loading vectors of the principal components are thus the "direction" of the variation in the dataset.
+
+$IMAGE GOES HERE$
 
 # Clustering 
 ### Similarity:
