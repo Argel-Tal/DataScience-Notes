@@ -46,6 +46,11 @@ Z<sup>1</sup> = a<sub>1,1</sub>X<sub>1</sub> + a<sub>1,2</sub>X<sub>2</sub> + ..
 
 These _loadings_ are selected to minimise _var(Z<sub>1</sub>)_, and such that _a<sup>2</sup><sub>1,1</sub> + a<sup>2</sup><sub>1,2</sub> + ... + a<sup>2</sup><sub>1,p</sub> = 1_. The loading vectors of the principal components are thus the "direction" of the variation in the dataset.
 
+__Sparse PCA__ is a version of PCA that penalises loading values, pushing them towards 0 as much as possible before preformance falls off.
+
+### t-SNE: Stochastic Neighbour Embedding
+Uses distance information and stochastic search to preserve neighbourhood relationships in high-dim space when shrunk onto a low-dim representation.
+
 
 # Clustering 
 ### Similarity:
