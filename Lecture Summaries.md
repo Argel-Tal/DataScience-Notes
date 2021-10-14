@@ -37,14 +37,15 @@ Variables are standardised and centered to _N(mean = 0, sd = 1)_
 From the `sum(var(principal components[Z]))`, we can see how much of the dataset's variance is explained, i.e. 
 - "_the first two principal components account for 88% of the variability in the data; the first three principal components account for 97% of the variability_" 
 
-Typically, the variance explained will decrease with each subsequent component, until it flatlines with no furter improvements to the amount of variation explained, producing an _"elbow plot"_
+Typically, the variance explained will decrease with each subsequent component, until it flatlines with no furter improvements to the amount of variation explained, producing an _"elbow plot"_:
+
+![Screenshot (1151)](https://user-images.githubusercontent.com/80669114/137230407-e3ffdefc-24d8-43d7-9d6f-cff807cc21f2.png)
 
 __Loadings:__
 Z<sup>1</sup> = a<sub>1,1</sub>X<sub>1</sub> + a<sub>1,2</sub>X<sub>2</sub> + ... + a<sub>1,p</sub>X<sub>p</sub> where a values are the _loadings_ associated with each variable within that principal component. 
 
-These _loadings_ are selected to minimise var(Z<sub>1</sub>), and such that a<sup>2</sup><sub>1,1</sub> + a<sup>2</sup><sub>1,2</sub> + ... + a<sup>2</sup><sub>1,p</sub> = 1. The loading vectors of the principal components are thus the "direction" of the variation in the dataset.
+These _loadings_ are selected to minimise _var(Z<sub>1</sub>)_, and such that _a<sup>2</sup><sub>1,1</sub> + a<sup>2</sup><sub>1,2</sub> + ... + a<sup>2</sup><sub>1,p</sub> = 1_. The loading vectors of the principal components are thus the "direction" of the variation in the dataset.
 
-$IMAGE GOES HERE$
 
 # Clustering 
 ### Similarity:
