@@ -143,7 +143,8 @@ SOMs provide a way of visualising which instances tend to cluster together, sugg
 - Root Relative Squared Error
 - Coefficient of determination (R<sup>2</sup>)
 ### Classification Problems: Misclassification - Is the cost of one type of error higher than another?
-- Sensitivity: what proportion of the true positives have we missed? `TP/(TP+FN)`
+- Precision: what proportion of the true positives have we missed? `TP/(TP+FN)`
+- Sensitivity: what proportion of the positive predictions were actaully positive `TP/(TP+FP)`
 - Specificity: what proportion of the true negatives have we correctly identified? `TN/(TN+FP)`
 - Receiver Operator Curves, ROC: TP relative to FP
 
