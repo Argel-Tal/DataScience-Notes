@@ -145,7 +145,7 @@ SOMs provide a way of visualising which instances tend to cluster together, sugg
 ### Classification Problems: Misclassification - Is the cost of one type of error higher than another?
 - Precision: what proportion of the true positives have we missed? `TP/(TP+FN)`
 - Sensitivity: what proportion of the positive predictions were actaully positive `TP/(TP+FP)`
-- Specificity: what proportion of the true negatives have we correctly identified? `TN/(TN+FP)`
+- Specificity: what proportion of the true negatives have we correctly identified? `TN/(TN+FN)`
 - Receiver Operator Curves, ROC: TP relative to FP
 
 No overlap, so no misclassification | Some overlap and misclassification
