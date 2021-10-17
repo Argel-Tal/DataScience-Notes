@@ -431,5 +431,16 @@ The value is given by: `C = 2y/z(z-1)`
     + This defines "how often does another node lie along the shortest path between other nodes on the network".
 
 
+# Sensitivity Analysis: 
+### Variation in the model's outputs ∝ variation in the model's inputs
+- How does the model change under a variety of inputs?
+- How does the value of a single variable influence the model? 
+- How important is a specific input/instance to the model?
 
+### Different Inputs:
+Given a sample of `x` from a distribution, we might get a different distribution of `y`, based on the likelihood of the `x` values present in our sample being present within our dataset. _"Given that the model saw this data, which is has a `p(x)` chance of being present, how different is `y` from when the model saw this other distribution of data"_
 
+### Noise:
+If noise is introduced to a variable, how does that change the output of the model?
+
+Doing this through the "hold all variables bar one fixed" may overlook correlated variables, which might introduce errors unrelated to noise itself. As such, we may want to use a more exhaustive searchtype.
