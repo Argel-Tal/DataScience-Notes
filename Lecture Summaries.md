@@ -51,7 +51,6 @@ __Sparse PCA__ is a version of PCA that penalises loading values, pushing them t
 ### t-SNE: Stochastic Neighbour Embedding
 Uses distance information and stochastic search to preserve neighbourhood relationships in high-dim space when shrunk onto a low-dim representation.
 
-
 # Clustering 
 ### Similarity:
 A measure of how different any two points are to each other, typically interpretted and determined through __distance metrics__
@@ -194,7 +193,7 @@ We take B bootstrapped versions of the dataset from our training dataset, and bu
 While this boosts preformance, we loose the advantage of trees being easy to interpret
 
 #### Boosting
-Growing many small trees that act in sequence, with each tree reducing the residual error passed to it from the previous tree. Each of these trees have a highly limited max depth.
+Growing many small trees that act in sequence, with each tree reducing the residual error passed to it from the previous tree. Each of these trees have a highly limited max depth. This is a form of __Stacking__, with the caveat that all stacked models are of the same type.
 
 A learning rate `λ` is applied, enforcing how much of the previous tree is remembered when it's passed to the next tree (typically inversely proportional to the number of trees `B`)
 
@@ -360,9 +359,73 @@ Evolutionary principles thus happen on the candidate programs themselves (the so
 # Linear Regression
 ### MLR
 
-### Splines and local models
+# Local Modelling
+### General Practice:
+- Use clustering to allocate local groupings
+- Create a local model at each of a given set of local states
+- Map new instances to one of the local groupings
+- Apply respective local model to a new instance
+
+### Error types:
+- Error in the selection of which local model to use
+    + This selection error `SE` is given by the difference between the error of the selected model `RE` and the error of the best model `BE`: SE<sub>i</sub> = RE<sub>i</sub> - BE<sub>i</sub>
+    + Across the whole dataset, the selection error `SE` = `(1 / n) * sum (|(RE - BE) / RE|)`
+- Error in the prediction of the local model - essentially normal regression/classification errors.
+
+### Splines - Local Linear Models:
+__Splines__ fit a linear model within a limited local domain, with the constraint that the change in gradient between domains == 0, and that the functions are continous (meaning they connect and don't have an aburpt change). This allows for higher flexibility over typical global-domain linear models, allowing us to better fit the dataset.
+
+Splines can also be fitted with penalty terms to reduce the overfitting possible introduced through their increased flexibility (bias:variance trade off).
 
 # Multi Objective Optimisation
+### Objective Space:
+Defined by the objective function, and the interactions of the cost criteria
+
+This might be wanting to minimise and maximise a set of functions, subject so a set of constraints and cost functions (which serve as penalty terms for given solutions)
+
+### Solutions:
+__Dominance:__
+A solution is said to dominate other solutions (`a>b`) if:
+- For any one objective `a` is better than `b`
+- For all remaining objectives `a` is no worse than `b`
+
+Non-domainated solutions form the Pareto Front, a curve along which each solution is equally valid
+
+{__pareto front image here__}
+
+### Evolutionary Multi-objective Optimisation (EMO)
+__Concept:__ 
+Searching for a covering along the Pareto-Front, not just a single solution/convergence.
+
+Fitness is given by a the number of solutions that dominate another given solution (pair-wise comparisons), thus fitness can be expressed as ranked list of the population by dominance counts or by a frequency table.
+
+__Convergence:__
+To prevent standard Genetic Algorithmic convergence, we need to penalise proximity of solutions to each other (along inital/original dimensions). This helps to ensure we get a smooth covering along the entire Pareto-Front.
+
+__Downsides of EMO:__ 
+- Computational complexity: `O(N^2)`
+    + Scalability ∝ number of objectives: `O(M*N^2)` where `M` is the number of objectives
+- This still requires a post-hoc human lead selection of a final solution from the candidates along the Pareto-Front, and confidence that the algorithm has indeed found the furthest out front, not some local minimum.
+
 
 # Artifical Neural Networks
+
+# Network Modelling - Graph Theory
+### Adjacency Matrix:
+Adjacency Matricies are `N*N` matricies describing the number of vertices connected to each vertex/node.
+Normally this is used to create the metric `p(k) ∝ k`
+
+### Clustering Coefficient (C):
+The clustering coefficient describes the density of connections around a given vertex/node.
+
+The value is given by: `C = 2y/z(z-1)`
+
+### Network Measures:
+- Distance: The geodesic distance, the shortest path's length between two connected nodes
+- Diameter: The maximum distance of all shortest paths between any two nodes ("the largest number of vertices which must be traversed in order to travel from one vertex to another when paths which backtrack, detour, or loop are excluded from consideration." - _https://mathworld.wolfram.com/GraphDiameter.html_)
+- Closeness Centrality: inverted sum of the shortest distances between each node and every other node. This defines the "ease of access" across the network
+- Between Centrality:   The ratio of all geodesic distances between pairs of nodes which run through other nodes. This defines "how often does another node lie along the shortest path between other nodes on the network".
+
+
+
 
