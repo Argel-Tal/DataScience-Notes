@@ -391,7 +391,7 @@ A solution is said to dominate other solutions (`a>b`) if:
 
 Non-domainated solutions form the Pareto Front, a curve along which each solution is equally valid
 
-{__pareto front image here__}
+![image](https://user-images.githubusercontent.com/80669114/137646377-f2f50ad4-a84d-4eef-872d-992fc20847a9.png)
 
 ### Evolutionary Multi-objective Optimisation (EMO)
 __Concept:__ 
