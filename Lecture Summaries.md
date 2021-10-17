@@ -425,8 +425,10 @@ The value is given by: `C = 2y/z(z-1)`
 - Diameter: The maximum distance of all shortest paths between any two nodes 
     + _"the largest number of vertices which must be traversed in order to travel from one vertex to another when paths which backtrack, detour, or loop are excluded from consideration."_
     + source: _https://mathworld.wolfram.com/GraphDiameter.html_
-- Closeness Centrality: inverted sum of the shortest distances between each node and every other node. This defines the "ease of access" across the network
-- Between Centrality:   The ratio of all geodesic distances between pairs of nodes which run through other nodes. This defines "how often does another node lie along the shortest path between other nodes on the network".
+- Closeness Centrality: inverted sum of the shortest distances between each node and every other node. 
+    + This defines the "ease of access" across the network
+- Between Centrality:   The ratio of all geodesic distances between pairs of nodes which run through other nodes.
+    + This defines "how often does another node lie along the shortest path between other nodes on the network".
 
 
 
