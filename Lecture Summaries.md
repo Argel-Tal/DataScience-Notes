@@ -1,3 +1,11 @@
+# Machine Learning processes:
+
+        data problem ---> data collection ---> pre-processing and exploration ---> feature selection
+                                    ^                                                    |
+                                     \                                                   |
+                                      \                                                  ↓
+                communication <--- Preformance analysis <--- Algorithm training <--- Model selection
+
 # Data and it's properties
 ### Types of data:
 - Simple
@@ -14,6 +22,19 @@
     + discrete
     + continuous
 
+### Aspects of data quality
+- Accuracy; does it match the "truth" of the real world environment
+- Completeness; does it have missing values?
+- Consistence; variance and outliers, does it make sense?
+- Integrity; what is it's origin and fitness for the purpose?
+- Timeliness; is it appropriate for when we're modelling this? Is there a lag, or has there been changes to the patterns between now and then?
+- Accessibility; how easy is it to access and model with?
+
+### Resolving missing values:
+- Imputation; replacing them with average values, or expected values given other variable states
+    + Random imputation, random selection from other instances within the dataset
+- Removal (column or row)
+
 ### Meta data:
 Documents the purpose, limitations, units and sourcing of the dataset.
 
@@ -21,9 +42,21 @@ Documents the purpose, limitations, units and sourcing of the dataset.
 - Scaling of the dataset (typically mean = 0 and standard deviation = 1)
 - Time series: component vector transformations, through Fourier Transformations
 - Log transformations: pushing non-linear variables onto linear scales
-- Dimension reduction: has it's own selection
+- Dimension reduction: reduce the complexity of the problem, and avoiding the boarding problem _"as dimensionality increases, the odds of an instance existing within at least one dimension's outlier range increases"_
 
 # Dimension Reduction
+### General Purpose:
+- Simplification of modelling
+- Reduces training time
+- Simplifies model assessment
+- Simplifies model communication
+
+### Itterative Stepwise Selection (forward and backward)
+A non-optimal way of itteratively removing/adding dimensions from the feature space until a specified complexity level is reached.
+Ideally this ensures we only have the most impactful variables being retained into our modelling.
+
+As these are stepwise processes, it only ensures we have a itteratively flattening gradient descent solution, not an overall minima/maxima. It can only ever find the best stepwise solution, it doesn't compute all possible combinations, only a variation of the previous version.
+
 ### PCA
 __Motivations:__
 - Reduce the number of dimensions
@@ -31,6 +64,8 @@ __Motivations:__
 
 __General Principal:__
 The new axes, the principle components, are linear combinations of the original variables, such that the variance of the principal components decreases with each subsequent component and that all components are uncorrelated.
+
+PCA does not utilize existing class labels (LDA does, and tries to ensure seperation between them)
 
 Variables are standardised and centered to _N(mean = 0, sd = 1)_
 
@@ -50,6 +85,11 @@ __Sparse PCA__ is a version of PCA that penalises loading values, pushing them t
 
 ### t-SNE: Stochastic Neighbour Embedding
 Uses distance information and stochastic search to preserve neighbourhood relationships in high-dim space when shrunk onto a low-dim representation.
+
+### Random Team selection:
+Variables are binned into random teams/pools, which are then passed forward into models. The different teams are then assessed for their proportion of variation explained, or ability to inform a well generalising model.
+
+It's an easy and quick way to do variable selection which provides good coverage but can be computationally expensive and it not guaranteed to be optimal.
 
 # Clustering 
 ### Similarity:
@@ -130,6 +170,14 @@ __Purpose of SOMs__
 SOMs provide a way of visualising which instances tend to cluster together, suggesting a similarity of variable values.
 
 # Measuring supervised model preformance
+
+### Overfitting:
+Machine learning models are essentially trying to memorise a dataset, subject to some constraints. In an ideal world, we would have all the data, and thus not need to create predictive/assumption based rules, we would just find a matching previously seen case. 
+
+Our models will do this, if given enough freedom and flexibility. To prevent this memorisation and overfitting, we need to do early stop or penalisation. These constraining pressures force our models to develop useful predictive rules, which allow us to generalise onto previously unseen data.
+
+__"Bias"__ is the reliance on existing samples, and the accuracy on previously unseen data: high bias is associated with poor preformance, __underfitting__.
+
 ### Components of model assessments:
 - cross model comparisons
 - cross dataset comparisons (testing and training data splits)
@@ -141,6 +189,12 @@ SOMs provide a way of visualising which instances tend to cluster together, sugg
 - Mean Absolute Error
 - Root Relative Squared Error
 - Coefficient of determination (R<sup>2</sup>)
+
+### Classification Metrics:
+- Confusion matrix [on target vs off target classifications]
+- ROC
+- Entropy: measurement of uncertainty
+
 ### Classification Problems: Misclassification - Is the cost of one type of error higher than another?
 - Precision PPV: what proportion of the true positives have we missed? `TP/(TP+FP)`
 - Sensitivity TPR: what proportion of the positive predictions were actaully positive `TP/(TP+FN)`
