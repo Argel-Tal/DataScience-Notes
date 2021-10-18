@@ -1,10 +1,26 @@
 # Machine Learning processes:
 
+### Traditional Statistical process:
+        data problem ---> manually create model rules ---> evaluate model ---> communication
+                               ↑                                 |
+                               \---     analyse errors       <---/
+
+### Machine Learning process:
         data problem ---> data collection ---> pre-processing and exploration ---> feature selection
-                                    ^                                                    |
+                                    ↑                                                    |
                                      \                                                   |
                                       \                                                  ↓
                 communication <--- Preformance analysis <--- Algorithm training <--- Model selection
+
+### Type of Modelling
+- Supervised Learning; known outputs
+- Unsupervised Learning; clustering and grouping
+- Semi-supervised
+- Reinforcement
+- Batch/Online
+- Systems/Process design
+- Instance Based
+- Model Based
 
 ### Selection of Algorithms:
 - What is the task/application?
@@ -152,6 +168,12 @@ __Drawbacks of kMeans__
 - `k` has be to specified apriori, meaning we need to run a number of trails at different levels of `k`
 - As `kMeans works in all dimensions, and doesn't do dimension reduction, it can be prone to the issues of working in high dimensional space.
 
+As this is a deterministic algorithm, we can draw a classification boundary along the problem space, showing where the classification of a new instance would change. A larger `k` value is typically associated with better generation preformance, but if taken too high can comprimise preformance through underfitting.
+
+{decison boundary image}
+
+_source: https://brookewenig.com/img/KNN/DecisionBoundary.png_
+
 ### Dendrograms
 Dendrograms are a clustering tree, where _like_ instances are grouped into _nodes_, which are then merge with other nodes.
 
@@ -201,13 +223,18 @@ __Purpose of SOMs__
 SOMs provide a way of visualising which instances tend to cluster together, suggesting a similarity of variable values.
 
 # Measuring supervised model preformance
-
 ### Overfitting:
 Machine learning models are essentially trying to memorise a dataset, subject to some constraints. In an ideal world, we would have all the data, and thus not need to create predictive/assumption based rules, we would just find a matching previously seen case. 
 
 Our models will do this, if given enough freedom and flexibility. To prevent this memorisation and overfitting, we need to do early stop or penalisation. These constraining pressures force our models to develop useful predictive rules, which allow us to generalise onto previously unseen data.
 
+We want to ensure that the error within our sample matches that of the wider population (out of sample error). Do do this, we reserve some data for training validation, called the _"testing"_ subset.
+
 __"Bias"__ is the reliance on existing samples, and the accuracy on previously unseen data: high bias is associated with poor preformance, __underfitting__.
+
+{testing vs training image here}
+
+_source: https://www.researchgate.net/publication/333827073/figure/fig1/AS:770834251644930@1560792615584/An-example-of-overfitting.png_
 
 ### Components of model assessments:
 - cross model comparisons
@@ -447,7 +474,47 @@ Evolutionary principles thus happen on the candidate programs themselves (the so
 - Areas where a solution architecture is unknown and undefined, but a fitness measure is defined.
 
 # Linear Regression
-### MLR
+### Multiple Linear Regression:
+- single predictor:     `yhat = w[0]*x[0] + b`
+- multiple predictors:  `yhat = w[0]*x[0] + w[1]*x[1] + ... + w[p]*x[p] + b`
+
+This essentially gives the output as a weighted sum function, where weights are applied to each of the explanatory variables.
+
+The weight and offset (`b`) values are chosen such that they reduce the mean-square-error (MSE).
+These can be set at different levels for each instance; 
+- Random slope: different weight levels for each instance, will produce a different curve
+- Random offset: different offset/error term for each instance, will set the origin at a different point
+
+### Penalised Linear Regression:
+__Lasso Regression - L1:__
+Weights are penalised such that some weights are force to be exactly 0, ensuring we only have the predictors that are asboutely necessary. This provides a form of implicit variable selection. As such, lasos is preferable over ridge regression for datasets that are highly dimensional
+
+The degree of penalisation is controlled by the alpha term: `α`, where higher `α` pushes a greater amount of weights to be == 0
+
+Lasso regression function: `yhat = α[0]*w[0]*x[0] + α[1]*w[1]*x[1] + ... + α[p]*w[p]*x[p] + b`
+
+__Ridge Regression - L2:__
+Weights are penalised such that higher values are penalised more, promoting weights to have a low value, close to 0, thus influencing the slope as little as possible. This helps to prevent terms from having unnecessarily outsized values, where other predictor's have weights to cancel out the affects of the outsized ones.
+
+The degree of penalisation is controlled by the alpha term: `α`, where higher `α` gives greater penalisation
+
+Ridge regression function: `yhat = α[0]*w[0]*x[0] + α[1]*w[1]*x[1] + ... + α[p]*w[p]*x[p] + b`
+
+__Elastic Net:__
+An elastic net essentially merges the penalisation of both Lasso and Ridge regression into one equation. The proportion of which penalisation term is applied is controlled through a hyper parameter, which splits the penalisation between [0:1] such that `prop(L1) + prop(L2) == 1`
+
+# Linear Classification:
+### General Principle:
+Draw a dividing line that places a class on one side of the line, and another on the other side.
+
+### Multiclass Classification:
+This is done through a __one versus the rest__ approach, where each class has it's own binary model, where the output is `in this class || not in this class`.
+
+Remainders which do not fall within the decision boundary of any class, in a shared zone between multiple classes, are allocated to the class who's decision boundary they are closest to.
+
+{linear multiclass classification image here}
+
+_source: https://raw.githubusercontent.com/satishgunjal/images/master/Binary_vs_Multiclass_Classification.png_
 
 # Local Modelling
 ### General Practice:
@@ -499,7 +566,6 @@ __Downsides of EMO:__
 
 
 # Artifical Neural Networks
-
 ### General Principles:
 ANN work by trying to find the optimal weight values from a random seed value, through minimising error terms associated with the prediction `yhat`, using gradient descent:
 
