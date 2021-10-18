@@ -170,7 +170,7 @@ __Drawbacks of kMeans__
 
 As this is a deterministic algorithm, we can draw a classification boundary along the problem space, showing where the classification of a new instance would change. A larger `k` value is typically associated with better generation preformance, but if taken too high can comprimise preformance through underfitting.
 
-{decison boundary image}
+![image](https://user-images.githubusercontent.com/80669114/137659841-d1634412-58bc-46d9-8ccd-00bfd9780c4b.png)
 
 _source: https://brookewenig.com/img/KNN/DecisionBoundary.png_
 
@@ -232,7 +232,7 @@ We want to ensure that the error within our sample matches that of the wider pop
 
 __"Bias"__ is the reliance on existing samples, and the accuracy on previously unseen data: high bias is associated with poor preformance, __underfitting__.
 
-{testing vs training image here}
+![image](https://user-images.githubusercontent.com/80669114/137659862-1d1e2ac1-f9fc-483b-84a1-bf6b3147d9ad.png)
 
 _source: https://www.researchgate.net/publication/333827073/figure/fig1/AS:770834251644930@1560792615584/An-example-of-overfitting.png_
 
@@ -512,7 +512,7 @@ This is done through a __one versus the rest__ approach, where each class has it
 
 Remainders which do not fall within the decision boundary of any class, in a shared zone between multiple classes, are allocated to the class who's decision boundary they are closest to.
 
-{linear multiclass classification image here}
+![image](https://user-images.githubusercontent.com/80669114/137659886-70134a7b-7ce3-4282-ae37-e5951f8ffb21.png)
 
 _source: https://raw.githubusercontent.com/satishgunjal/images/master/Binary_vs_Multiclass_Classification.png_
 
