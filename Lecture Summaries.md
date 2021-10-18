@@ -6,6 +6,16 @@
                                       \                                                  ↓
                 communication <--- Preformance analysis <--- Algorithm training <--- Model selection
 
+### Selection of Algorithms:
+- What is the task/application?
+- Do we need parameteric or non-parametric solutions?
+- Do we need optimality?
+- How long do we have?
+- How much computational resources do we have?
+- How big is the dataset?
+- What is our preformance criteria, pure accuracy, false discovery, misclassification...?
+- How important is explainability and simplicity?
+
 # Data and it's properties
 ### Types of data:
 - Simple
@@ -108,7 +118,7 @@ For problems without complex underlying functions we can find the the minimum va
 
 If the problem's function is unknown, we can evaluate the fitness value at various points, moving to decrease the cost/loss function until we reach a minima. By adding a momentum term, we can hopefully avoid local minima, and instead find the global minimum.
 
-# Clustering 
+# Clustering, Unsupervised Learning
 ### Similarity:
 A measure of how different any two points are to each other, typically interpretted and determined through __distance metrics__
 
@@ -190,8 +200,6 @@ In later epochs, neurons will be more resistant to change, with both instance va
 __Purpose of SOMs__
 SOMs provide a way of visualising which instances tend to cluster together, suggesting a similarity of variable values.
 
-
-
 # Measuring supervised model preformance
 
 ### Overfitting:
@@ -219,6 +227,10 @@ __"Bias"__ is the reliance on existing samples, and the accuracy on previously u
 - Entropy: measurement of uncertainty
 
 ### Classification Problems: Misclassification - Is the cost of one type of error higher than another?
+
+{CONFUSION MATRIX image here}
+_source: https://2.bp.blogspot.com/-EvSXDotTOwc/XMfeOGZ-CVI/AAAAAAAAEiE/oePFfvhfOQM11dgRn9FkPxlegCXbgOF4QCLcBGAs/s1600/confusionMatrxiUpdated.jpg_
+
 - Precision PPV: what proportion of the true positives have we missed? `TP/(TP+FP)`
 - Sensitivity TPR: what proportion of the positive predictions were actaully positive `TP/(TP+FN)`
 - Specificity TNR: what proportion of the true negatives have we correctly identified? `TN/(TN+FP)`
@@ -487,6 +499,37 @@ __Downsides of EMO:__
 
 # Artifical Neural Networks
 
+### General Principles:
+ANN work by trying to find the optimal weight values from a random seed value, through minimising error terms associated with the prediction `yhat`, using gradient descent:
+
+Δw<sub>i</sub> <- η∇w<sub>i</sub> E(w<sub>i</sub>), minimising yhat<sub>i</sub> - y<sub>i</sub>
+
+        X0  ---> weight 0   --->  |------------------------|
+        X1  ---> weight 1   --->  |                        |
+        X2  ---> weight 2   --->  | function ---> sigmoid  | ---> pred(Yhat)
+        ...       ...             |                        |
+        Xn  ---> weight n   --->  |------------------------|
+
+### Activation functions and Hidden Layers
+Adding these allows for increased complexity, extending the ANN beyond linear problems, allowing it to solve XOR type problems and fit polynomial functions curves
+
+                Single Layer:
+             X   X       O   X
+             O   O       O   X
+
+                Multi Layer:
+        X   X       O   X       X   O
+        O   O       O   X       O   X
+        
+{ANN image here}
+
+_source: https://cdn-images-1.medium.com/max/1600/1*Gh5PS4R_A5drl5ebd_gNrg@2x.png_
+
+__Types of Activation Functions:__
+- Sigmoid (typical standardisation [0:1])
+- RELU
+- Softmax
+
 # Network Modelling - Graph Theory
 ### Adjacency Matrix:
 Adjacency Matricies are `N*N` matricies describing the number of vertices connected to each vertex/node.
@@ -521,3 +564,29 @@ Given a sample of `x` from a distribution, we might get a different distribution
 If noise is introduced to a variable, how does that change the output of the model?
 
 Doing this through the "hold all variables bar one fixed" may overlook correlated variables, which might introduce errors unrelated to noise itself. As such, we may want to use a more exhaustive searchtype.
+
+
+# Ethical Concerns around Data Science:
+### Delegation:
+Where responsbility is delegated to algorithms, it's shortcomings and assumptions tend to be smoothed over in order to reduce workload, and get missed when handed to non-technical staff who haven't received sufficient training/information about the system. 
+
+Not only does this mean the model may be applied where it isn't fit, or it's outcomes misinterpretted, it also becomeas a __blackbox__ risk: where the users of a ML system don't know how the algorithm came up with the solution it did, and have no way of breaking down the decision process.
+
+### False Attribution:
+The assumption that the system is infallible and unbiased allows for users to dismiss existing biases and to misrepresent the decisions of an algorithm. This capacity for deliberate or accidental misrepresentation is furthered when the system is not communicated to the public (i.e. propritory systems or national security)
+
+### Do No Harm: 
+Autonomous systems do have impacts on the lives of real people, their decisions shape the oppertunities and futures of those around them. Sometimes these algorithms may even shape the decision making processes of their users, shifting their world view and altering their decisions without explicitly making those decisions itself (i.e. social media "news" feeds).
+
+### Proactive vs Reactive nature of data analysis:
+Where Computer Science and Software has the explicit intent to create a solution before it is implemented, data science is often reactive, discovering patterns, trends or pathways in existing systems. It thus falls on the practitioners to selectively relay that information and apply it in an ethical way. 
+
+Once discovered, the information and processes don't go away, and can often be extended beyond the initial scope. A facial recognition service for identifying your friends from a list in photos is just as much a criminal identification system, or a political dissident finder. 
+
+### Data Collection:
+- Is the data still being used for it's inital purpose? Is it being used in the way that participants consented to? 
+- Was the data collected with informed consent at all?
+- How long is the data being retained for? Did the provider expect you to have a record dating back that far? How valid is it to use data of a certain age, is it still appropriate (especially in a human context)?
+- Is the data correctly anonymised? Is that even possible given the large array of explanatory variables?
+- Is the data sufficiently protected, through security controls and encryption?
+
