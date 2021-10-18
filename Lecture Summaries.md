@@ -271,7 +271,7 @@ _source: https://2.bp.blogspot.com/-EvSXDotTOwc/XMfeOGZ-CVI/AAAAAAAAEiE/oePFfvhf
 - Sensitivity TPR: what proportion of the positive predictions were actaully positive `TP/(TP+FN)`
 - Specificity TNR: what proportion of the true negatives have we correctly identified? `TN/(TN+FP)`
 - False Discovery Rate FDR: What is the ratio of false positive to all positive predictions `FP/(FP+TP)`
-- Receiver Operator Curves, ROC: Binary classification - True Positive Rate relative to False Positive Rate
+- Receiver Operator Curves, ROC: Binary classification - True Positive Rate relative to False Positive Rate, and where cut points will cause FNs and FPs
 - AUC curves: shows the area underneath the ROC curves - ideally will be a horizontal asymptote, not a positive diagonal (given by random allocation)
 
 No overlap, so no misclassification | Some overlap and misclassification
