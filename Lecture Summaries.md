@@ -230,7 +230,9 @@ Our models will do this, if given enough freedom and flexibility. To prevent thi
 
 We want to ensure that the error within our sample matches that of the wider population (out of sample error). Do do this, we reserve some data for training validation, called the _"testing"_ subset.
 
-__"Bias"__ is the reliance on existing samples, and the accuracy on previously unseen data: high bias is associated with poor preformance, __underfitting__.
+__"Bias:"__ model's reliance on existing samples, and the inaccuracy on previously unseen data: high bias is associated with poor preformance, __underfitting__.
+
+__"Variance:"__ model's sensitivity to changes in the dataset -> how "jumpy"/noisey the model is
 
 ![image](https://user-images.githubusercontent.com/80669114/137659862-1d1e2ac1-f9fc-483b-84a1-bf6b3147d9ad.png)
 
@@ -477,6 +479,7 @@ Evolutionary principles thus happen on the candidate programs themselves (the so
 ### Multiple Linear Regression:
 - single predictor:     `yhat = w[0]*x[0] + b`
 - multiple predictors:  `yhat = w[0]*x[0] + w[1]*x[1] + ... + w[p]*x[p] + b`
+- polynomial predictors: `yhat` = Θ<sub>0</sub> `+ sum`(Θ<sub>i</sub> * z<sub>i</sub>), where z = [x<sub>1</sub>, x<sub>2</sub>, x<sub>1</sub>x<sub>2</sub>, x<sub>1</sub><sup>2</sup>...]
 
 This essentially gives the output as a weighted sum function, where weights are applied to each of the explanatory variables.
 
