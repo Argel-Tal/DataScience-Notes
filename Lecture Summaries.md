@@ -267,12 +267,13 @@ _source: https://www.researchgate.net/publication/333827073/figure/fig1/AS:77083
 
 _source: https://2.bp.blogspot.com/-EvSXDotTOwc/XMfeOGZ-CVI/AAAAAAAAEiE/oePFfvhfOQM11dgRn9FkPxlegCXbgOF4QCLcBGAs/s1600/confusionMatrxiUpdated.jpg_
 
-- Precision PPV: what proportion of the true positives have we missed? `TP/(TP+FP)`
-- Sensitivity TPR: what proportion of the positive predictions were actaully positive `TP/(TP+FN)`
-- Specificity TNR: what proportion of the true negatives have we correctly identified? `TN/(TN+FP)`
-- False Discovery Rate FDR: What is the ratio of false positive to all positive predictions `FP/(FP+TP)`
-- Receiver Operator Curves, ROC: Binary classification - True Positive Rate relative to False Positive Rate, and where cut points will cause FNs and FPs
-- AUC curves: shows the area underneath the ROC curves - ideally will be a horizontal asymptote, not a positive diagonal (given by random allocation)
+- __Precision__ PPV: Of the posititve predictions, how many are true? `TP/(TP+FP)`
+- __Sensitivity/Recall__ TPR: what proportion of the positive predictions were actaully positive `TP/(TP+FN)`
+- __Specificity__ TNR: what proportion of the true negatives have we correctly identified? `TN/(TN+FP)`
+- __False Discovery Rate__ FDR: What is the ratio of false positive to all positive predictions `FP/(FP+TP)`
+- __F score__: `2 / ((1/precision) + (1/recall))`
+- __Receiver Operator Curves__, ROC: Binary classification - True Positive Rate relative to False Positive Rate, and where cut points will cause FNs and FPs
+- __AUC curves__: shows the area underneath the ROC curves - ideally will be a horizontal asymptote, not a positive diagonal (given by random allocation)
 
 No overlap, so no misclassification | Some overlap and misclassification
 ------------------------------------|--------------
