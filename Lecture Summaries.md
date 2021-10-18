@@ -578,13 +578,19 @@ __Downsides of EMO:__
 ### General Principles:
 ANN work by trying to find the optimal weight values from a random seed value, through minimising error terms associated with the prediction `yhat`, using gradient descent:
 
+        X0  ---> weight 0   --->  
+        X1  ---> weight 1   --->  ┍------------------------┐
+        X2  ---> weight 2   --->  | function ---> sigmoid  | ---> pred(Yhat)
+        ...       ...             ┕------------------------┙
+        Xn  ---> weight n   --->  
+
 Δw<sub>i</sub> <- η∇w<sub>i</sub> E(w<sub>i</sub>), minimising yhat<sub>i</sub> - y<sub>i</sub>, where η is the _"learning rate"_.
 
-        X0  ---> weight 0   --->  |------------------------|
-        X1  ---> weight 1   --->  |                        |
-        X2  ---> weight 2   --->  | function ---> sigmoid  | ---> pred(Yhat)
-        ...       ...             |                        |
-        Xn  ---> weight n   --->  |------------------------|
+__Backpropagation of residual errors:__ welcome to _the chain rule_
+
+        Weights:      Δw = -η1 * 𝛿E/𝛿w
+        Hidden Layer: Δv = -η2 * 𝛿E/𝛿v
+                         = -η2 * 𝛿E/𝛿z * 𝛿z/𝛿v
 
 ### Activation functions and Hidden Layers
 Adding these allows for increased complexity, extending the ANN beyond linear problems, allowing it to solve XOR type problems and fit polynomial functions curves
