@@ -133,10 +133,10 @@ For problems without complex underlying functions we can find the the minimum va
 
 If the problem's function is unknown, we can evaluate the fitness value at various points, moving to decrease the cost/loss function until we reach a minima. By adding a momentum term, we can hopefully avoid local minima, and instead find the global minimum.
 
-- Gradient Descent optimasation: Δw<sub>i</sub> <- η∇w<sub>i</sub> E(w<sub>i</sub>), minimising yhat<sub>i</sub> - y<sub>i</sub>, where η is the _"learning rate"_.
-- Momentum enhanced Gradient Descent: Δw<sub>i</sub> <- γ*Δw<sub>i</sub> - η∇w<sub>i</sub> E(w<sub>i</sub>), minimising yhat<sub>i</sub> - y<sub>i</sub>, where η is the _"learning rate"_, and γ is the "momentum" coefficient.
+- __Gradient Descent optimasation:__ Δw<sub>i</sub> <- η∇w<sub>i</sub> E(w<sub>i</sub>), minimising yhat<sub>i</sub> - y<sub>i</sub>, where η is the _"learning rate"_.
+- __Momentum enhanced Gradient Descent:__ Δw<sub>i</sub> <- γ*Δw<sub>i</sub> - η∇w<sub>i</sub> E(w<sub>i</sub>), minimising yhat<sub>i</sub> - y<sub>i</sub>, where η is the _"learning rate"_, and γ is the "momentum" coefficient.
 
-{momentum image here}
+![momentum1d](https://user-images.githubusercontent.com/80669114/137662969-72bb69de-8b4a-45b0-90ae-51aff1237ca4.gif)
 
 _source: https://www.eleven-lab.co.jp/contents/wp-content/uploads/2019/08/momentum1d.gif_
 
@@ -172,7 +172,7 @@ kMeans is a radial clustering algorithm centred around grouping points around an
 __Drawbacks of kMeans__
 - As this is a radially defined algorithm, it preforms poorly on shaped clusters
 - `k` has be to specified apriori, meaning we need to run a number of trails at different levels of `k`
-- As `kMeans works in all dimensions, and doesn't do dimension reduction, it can be prone to the issues of working in high dimensional space.
+- As kMeans works in all dimensions, and doesn't do dimension reduction, it can be prone to the issues of working in high dimensional space.
 
 As this is a deterministic algorithm, we can draw a classification boundary along the problem space, showing where the classification of a new instance would change. A larger `k` value is typically associated with better generation preformance, but if taken too high can comprimise preformance through underfitting.
 
