@@ -228,7 +228,8 @@ __"Bias"__ is the reliance on existing samples, and the accuracy on previously u
 
 ### Classification Problems: Misclassification - Is the cost of one type of error higher than another?
 
-{CONFUSION MATRIX image here}
+![image](https://user-images.githubusercontent.com/80669114/137656718-e41979e3-f6eb-4103-a61b-12de3e438a7b.png)
+
 _source: https://2.bp.blogspot.com/-EvSXDotTOwc/XMfeOGZ-CVI/AAAAAAAAEiE/oePFfvhfOQM11dgRn9FkPxlegCXbgOF4QCLcBGAs/s1600/confusionMatrxiUpdated.jpg_
 
 - Precision PPV: what proportion of the true positives have we missed? `TP/(TP+FP)`
@@ -521,7 +522,7 @@ Adding these allows for increased complexity, extending the ANN beyond linear pr
         X   X       O   X       X   O
         O   O       O   X       O   X
         
-{ANN image here}
+![image](https://user-images.githubusercontent.com/80669114/137656751-71b85d23-e8bf-4e56-bccd-cf455e200a36.png)
 
 _source: https://cdn-images-1.medium.com/max/1600/1*Gh5PS4R_A5drl5ebd_gNrg@2x.png_
 
