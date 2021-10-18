@@ -30,6 +30,12 @@
 - Timeliness; is it appropriate for when we're modelling this? Is there a lag, or has there been changes to the patterns between now and then?
 - Accessibility; how easy is it to access and model with?
 
+### Big Data - 4 V's
+1. Volume: the amount of data
+2. Variety: do we have data types, different values, different classes?
+3. Velocity: how fast is the data being created?
+4. Validity: do we trust the data? Does it fit the problem we're trying to solve?
+
 ### Resolving missing values:
 - Imputation; replacing them with average values, or expected values given other variable states
     + Random imputation, random selection from other instances within the dataset
@@ -91,11 +97,26 @@ Variables are binned into random teams/pools, which are then passed forward into
 
 It's an easy and quick way to do variable selection which provides good coverage but can be computationally expensive and it not guaranteed to be optimal.
 
+# Optimisation & Scalability:
+### Gridsearch:
+Creates a "grid" across all variables, with an interval "step size" along the domain of that variable. We then step over that variable looking for model improvements.
+
+As preformance improves, the step size decreases, allowing for more fine value finding. At too large of a step size, we may skip over optimal values. At too small of a step size, the algorithm will take too long.
+
+### Loss Functions and Gradient Descent:
+For problems without complex underlying functions we can find the the minimum value through derivative calculus. 
+
+If the problem's function is unknown, we can evaluate the fitness value at various points, moving to decrease the cost/loss function until we reach a minima. By adding a momentum term, we can hopefully avoid local minima, and instead find the global minimum.
+
 # Clustering 
 ### Similarity:
 A measure of how different any two points are to each other, typically interpretted and determined through __distance metrics__
 
 Typically requires the data to be scaled, such that all numeric values are on the same scale, normally to either `N(mean = 0, sd = 1)` or `[0:1]` for non-negative data. 
+
+### Evaluation of Clustering: Silhuette Scores
+Silhuette scores is the fit in a given cluster, compared to the fit of that instance into other clusters. 
+Typically the sum/average of silhuette scores is evaluated across different clustering algorithms or across different numbers of clusters.
 
 ### Feature creation:
 Using the important features, we can create new variables that can be leveraged in clustering processes, or analysing the parameters of the clusters.
@@ -168,6 +189,8 @@ In later epochs, neurons will be more resistant to change, with both instance va
 
 __Purpose of SOMs__
 SOMs provide a way of visualising which instances tend to cluster together, suggesting a similarity of variable values.
+
+
 
 # Measuring supervised model preformance
 
