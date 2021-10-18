@@ -1,5 +1,4 @@
 # Machine Learning processes:
-
 ### Traditional Statistical process:
         data problem ---> manually create model rules ---> evaluate model ---> communication
                                ↑                                 |
@@ -133,6 +132,13 @@ As preformance improves, the step size decreases, allowing for more fine value f
 For problems without complex underlying functions we can find the the minimum value through derivative calculus. 
 
 If the problem's function is unknown, we can evaluate the fitness value at various points, moving to decrease the cost/loss function until we reach a minima. By adding a momentum term, we can hopefully avoid local minima, and instead find the global minimum.
+
+- Gradient Descent optimasation: Δw<sub>i</sub> <- η∇w<sub>i</sub> E(w<sub>i</sub>), minimising yhat<sub>i</sub> - y<sub>i</sub>, where η is the _"learning rate"_.
+- Momentum enhanced Gradient Descent: Δw<sub>i</sub> <- γ*Δw<sub>i</sub> - η∇w<sub>i</sub> E(w<sub>i</sub>), minimising yhat<sub>i</sub> - y<sub>i</sub>, where η is the _"learning rate"_, and γ is the "momentum" coefficient.
+
+{momentum image here}
+
+_source: https://www.eleven-lab.co.jp/contents/wp-content/uploads/2019/08/momentum1d.gif_
 
 # Clustering, Unsupervised Learning
 ### Similarity:
@@ -572,7 +578,7 @@ __Downsides of EMO:__
 ### General Principles:
 ANN work by trying to find the optimal weight values from a random seed value, through minimising error terms associated with the prediction `yhat`, using gradient descent:
 
-Δw<sub>i</sub> <- η∇w<sub>i</sub> E(w<sub>i</sub>), minimising yhat<sub>i</sub> - y<sub>i</sub>
+Δw<sub>i</sub> <- η∇w<sub>i</sub> E(w<sub>i</sub>), minimising yhat<sub>i</sub> - y<sub>i</sub>, where η is the _"learning rate"_.
 
         X0  ---> weight 0   --->  |------------------------|
         X1  ---> weight 1   --->  |                        |
