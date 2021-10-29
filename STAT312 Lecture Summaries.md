@@ -76,5 +76,5 @@ n estimated params  | c<sub>p</sub> + 1/2 * p(p+1) + C -1 | needs to be signific
 __Maximising discriminant functions:__
 - δ<sub>c</sub>(x) = (X<sup>T</sup>Σ<sup>-1</sup>μ<sub>c</sub>) - (1/2) * (μ<sub>c</sub><sup>T</sup>Σ<sup>-1</sup>μ<sub>c</sub>) + log(π<sub>c</sub>)
 - δ<sub>c</sub> divides the space into sections by class, creating planes/boundaries
-- __$$ LDA picture HERE__
+- ![Axes-1-and-2-from-linear-discriminant-analysis-LDA-based-on-17-brittle-stars](https://user-images.githubusercontent.com/80669114/139508260-067db2f0-ff54-4215-8ff1-c760f66eb8c3.jpg)
     + source: https://www.researchgate.net/figure/Axes-1-and-2-from-linear-discriminant-analysis-LDA-based-on-17-brittle-stars_fig3_330571683
