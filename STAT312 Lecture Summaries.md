@@ -1,5 +1,26 @@
 # Dimension Reduction
 ### Definitions:
+- Original dimensionality: the original representation
+- intrinsic dimensionality: actual dimensionality of the problem
+- embedded dimensionality: the reduced space
+
+### Multidimensional scaling:
+__Definition:__
+Maintaining the distance between observations without preserving the values of those observations.
+
+1. Points close in original dim-space should remain close in the embedded dim-space
+2. Points far from each other in the original dim-space should remain far away from each other in the embedded dim-space
+
+This ensures we maintain the same clustering structures and patterns when moving into the embedded space.
+
+### Closeness without Distance: 
+- Metric MDS: preserving the original dimensionality as much as possible
+- Non-metric MDS: preserving the ordering of distances; _3rd closest should still be the 3rd closest..._
+- Model based: distances are essentially treated as compressable/expandable springs, exposed to _"stress forces"_
+
+Examples:
+1. Kruskal's non-metric NDS (isoMDS)
+2. Sammon's non-linear MDS
 
 # Principal Component Analysis:
 ### Base Principal Component Analysis:
