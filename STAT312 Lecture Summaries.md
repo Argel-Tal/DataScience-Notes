@@ -1,6 +1,8 @@
 # Dimension Reduction
+### Definitions:
 
-### Principal Component Analysis:
+# Principal Component Analysis:
+### Base Principal Component Analysis:
 __Purpose:__
 Selecting a combination of variables and putting them into new variables, such that the combinations explain the most variation within the dataset.
 
@@ -65,7 +67,7 @@ __Purpose:__
 Variables must all be scaled to `μ = 0, σ = 1`
 
 __With one factor (F):__
-the underlying model is _X<sub>j</sub> = λ<sub>j</sub>F + e<sub>j</sub>_, where  _μ(F) = 0 && σ(F) = 1_ and _μ(e<sub>j</sub>) = 0_. _e<sub>j</sub>_ captures the variance unexplained by our factor modelling.
+the underlying model is _X<sub>j</sub> = λ<sub>j</sub>F + ε<sub>j</sub>_, where  _μ(F) = 0 && σ(F) = 1_ and _μ(ε<sub>j</sub>) = 0_. _ε<sub>j</sub>_ captures the variance unexplained by our factor modelling.
 
 
 The loadings of each factor are expressed as _λ<sub>j,1</sub>_, as they would be in PCA. 
@@ -127,3 +129,27 @@ Estimates _C<sub>p</sub> + (1/2) + C<sub>p</sub>(p+1) + C - 1_ parameters, which
 ### Requirements:
 - no.params < n
 - _(1/2)*p(p + 1)_ < the number of instances in the clusters
+
+# Independant Component Analysis:
+Assuming that X = n.p is a matrix of indpendant signals; _S<sub>1</sub>, S<sub>2</sub>, ... , S<sub>p</sub>_, we can define the matrix as:
+
+X<sub>1</sub> |  a<sub>1,1</sub>S<sub>1</sub> + | a<sub>1,2</sub>S<sub>2</sub> + | ... | a<sub>1,p</sub>S<sub>p</sub>
+-------|----------|--------|--------|--------
+X<sub>2</sub> |  a<sub>2,1</sub>S<sub>1</sub> + | a<sub>2,2</sub>S<sub>2</sub> + | ... | a<sub>2,p</sub>S<sub>p</sub>
+...|...|...|...|...
+X<sub>n</sub> |  a<sub>n,1</sub>S<sub>1</sub> + | a<sub>n,2</sub>S<sub>2</sub> + | ... | a<sub>n,p</sub>S<sub>p</sub>
+
+_X = SA<sup>T</sup>, S = XA_, where A is an "unmixing" matrix
+
+__Motivations:__
+ICA does not assume normality, and instead uses an approximation to the true entropy formula, approximating the true distribution using the observed distribution.
+
+ICA is used in scenarios with multiple input streams, such as audio and medical imaging.
+
+### Whitening:
+Using singular value decomposition, such that we can assume _var(x<sub>j</sub>) = 1_ and _corr(x<sub>j</sub>, x<sub>k</sub>) = 0, if j =/= k_:
+
+- _X = UDV<sup>T</sup>_
+    + _K = sqrt(n) * V * D<sup>-1</sup>_
+    + _est(X) = X * K_
+    + _cov(est(X)) = (1/n) * est(X)<sup>T</sup> * est(X) = 1_
