@@ -53,3 +53,28 @@ __effective on low dimensional data__ | linear | non-linear | linear
 __tunable params__ | no | yes (kernel function) | yes (tuning & penalty)
 __interpretable PC's__ | maybe | no | maybe
 __scalable to large _p_ or _n___ | somewhat | difficult | difficult
+
+# Classification
+### Linear Discriminant Analysis (LDA):
+__Purpose:__ 
+Can we know something about the values and features, given the allocation of instances into predetermined classes.
+_f<sub>c</sub>(x) = P(x|Y=c)_
+
+__Requirements:__
+- needs exclusively continuous predictors only
+- Posterior Probabilities: _p<sub>c</sub>(x) = π<sub>c</sub>f<sub>c</sub>(x) / Σ(π<sub>c</sub>f<sub>c</sub>(x))_
+- Prior Probabilities: _π<sub>c</sub> = P(Y=c)_
+
+__Estimated Parameters:__
+Parameter | Calculation | Definition
+----------|-------------|-----------
+π<sub>c</sub> | n<sub>c</sub>/n | the proportion of each class within the larger dataset
+μ<sub>c</sub> || sample mean of each class
+Σ<sub>c</sub> || the weighted average of sample covariances of each class
+n estimated params  | c<sub>p</sub> + 1/2 * p(p+1) + C -1 | needs to be significantly below n
+
+__Maximising discriminant functions:__
+- δ<sub>c</sub>(x) = (X<sup>T</sup>Σ<sup>-1</sup>μ<sub>c</sub>) - (1/2) * (μ<sub>c</sub><sup>T</sup>Σ<sup>-1</sup>μ<sub>c</sub>) + log(π<sub>c</sub>)
+- δ<sub>c</sub> divides the space into sections by class, creating planes/boundaries
+- __$$ LDA picture HERE__
+    + source: https://www.researchgate.net/figure/Axes-1-and-2-from-linear-discriminant-analysis-LDA-based-on-17-brittle-stars_fig3_330571683
