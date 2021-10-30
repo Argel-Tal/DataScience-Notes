@@ -263,7 +263,6 @@ __Local Linear Embedding:__
 
 # Selecting Cluster Counts
 Plotting intracluster variation, we should see a rapid decrease in variance as clusters increase, however the gradient of this decrease should rapidly fall off to near horizontal. This will have an "elbow" point, where our optimal number of clusters is achieved, before we risk overfitting.
-
 ### Gap Statistic
 The Gap Statistic is an attempt at automatically locating the optimal number of clusters (_no.clusters = k_), by measuring gradient change
 
