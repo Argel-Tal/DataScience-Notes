@@ -264,4 +264,38 @@ __Local Linear Embedding:__
 # Selecting Cluster Counts
 Plotting intracluster variation, we should see a rapid decrease in variance as clusters increase, however the gradient of this decrease should rapidly fall off to near horizontal. This will have an "elbow" point, where our optimal number of clusters is achieved, before we risk overfitting.
 
-![Screenshot (1151)](https://user-images.githubusercontent.com/80669114/
+### Gap Statistic
+The Gap Statistic is an attempt at automatically locating the optimal number of clusters (_no.clusters = k_), by measuring gradient change
+
+Statistic| Calculation | Definition
+---------|-------------|--------
+_gap(k)_ | _= (1/B) * sum(log(w<sup>b</sup><sub>k</sub> - log(w<sub>k</sub>)))_ | The difference in the (log) total within cluster variation from the actual data vs the expected (log) within cluster variation from uniform/reference data.
+
+- with _current no.clusters (k) < ideal no.clusters (k*)_, the current clusters are likely to not be uniform in internal variance, so the gap statistic will grow rapidly
+
+- with _k* < k_ the clusters are becoming more uniform, and thus the gap statistic will fall off.
+
+$$ GAP IMAGE HERE
+
+Image source: _http://www.sthda.com/sthda/RDoc/figure/clustering/determining-the-number-of-clusters-gap-statistic-k-means-1.png_
+
+### Silhuette Score; Clustering evaluation
+metric  | definition
+--------|-----------
+`a(i)`  | the average dissimilarity of an instance (i) to all observations in a given cluster
+`b(i)`  | the average dissimilarity of an instance (i) to all observations in all other clusters
+`s(i) = (b(i)-a(i)) / max{a(i), b(i)}` | bounded `[-1,+1]`, where `+1` is ideal
+`S = (1/n) * sum(s(i))` | Silhuette score
+
+# Hyperplane clustering and Support Vectors:
+### Maximal Margin Classifiers:
+The maximal margin classifier is the hyperplane which provides optimal class seperation. The _"margin"_ is defined as the minimum distance of an observation to the dividing hyperplane.
+
+Ideally, we want to maximise the "non-man's land", created by the margin, between classes that are split by the hyperplane.
+
+This requires scaling, such that all dimensions are on the same scale, and so we can use distance metrics. 
+
+The instances which inform the margin are refered to as _"support vectors"_, as they are vectors of length p, and which support the creation of the margin.
+
+
+
