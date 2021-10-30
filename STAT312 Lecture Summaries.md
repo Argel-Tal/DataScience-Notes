@@ -260,3 +260,8 @@ __Local Linear Embedding:__
 1. define a neighbourhood metric
 2. find an approximation of each point using the weighted sum of their neighbours
 3. using these weights, find the coordinates Z<sub>i</sub> which satisfy approximations in a pre-determined lower dimension space.
+
+# Selecting Cluster Counts
+Plotting intracluster variation, we should see a rapid decrease in variance as clusters increase, however the gradient of this decrease should rapidly fall off to near horizontal. This will have an "elbow" point, where our optimal number of clusters is achieved, before we risk overfitting.
+
+![Screenshot (1151)](https://user-images.githubusercontent.com/80669114/
