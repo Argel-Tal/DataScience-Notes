@@ -174,3 +174,27 @@ Using singular value decomposition, such that we can assume _var(x<sub>j</sub>) 
     + _K = sqrt(n) * V * D<sup>-1</sup>_
     + _est(X) = X * K_
     + _cov(est(X)) = (1/n) * est(X)<sup>T</sup> * est(X) = 1_
+
+
+
+# Model Selection and Bootstraps
+Using previous data to evaluate the likelihood of outputs being the values they are, given previously seen input-output values. 
+
+Likelihood Ratio Test Statistic (LRTS) = 2(l(G<sub>1</sub>)-l(G<sub>0</sub>)), where l is the log-likelihood evaluated at the estimated GMM parameters.
+LRTS typically has a χ<sub>2</sub> distribution. This can be tested for with a bootstrapped distribution, evaluating the number of time the LRTS<sub>b</sub> exceeded the expected value LRTS<sub>0</sub>. This allows us to test if we need to reject the current number of clusters in our model.
+
+1. _H<sub>0</sub>: G = G<sub>0_
+2. _H<sub>1</sub>: G = G<sub>1</sub> > G<sub>0_
+
+### Quantifying Uncertainty: 
+Bootstraping to compute the std error and CI's
+- Let θ denote the parameter of estimates/model
+- Using a boostrap we estimate θ<sub>b</sub> for the dataset X<sub>b</sub>
+- Compute the covarience matrix of θ<sub>b</sub>, who's diagonal elements are the std error of the parameters θ<sub>b</sub>
+    + These should be normally distributed.
+- Can also plot the distribution of sample means
+
+### Features of Model Based Clustering:
+As the clustering isn't based on proximity of clusters/points, or on density, the clusterings aren't necessary uniform or visually "logical"
+
+# Networks and Connectivity
