@@ -22,6 +22,7 @@ Examples:
 1. Kruskal's non-metric NDS (isoMDS)
 2. Sammon's non-linear MDS
 
+
 # Principal Component Analysis:
 ### Base Principal Component Analysis:
 __Purpose:__
@@ -176,7 +177,6 @@ Using singular value decomposition, such that we can assume _var(x<sub>j</sub>) 
     + _cov(est(X)) = (1/n) * est(X)<sup>T</sup> * est(X) = 1_
 
 
-
 # Model Selection and Bootstraps
 Using previous data to evaluate the likelihood of outputs being the values they are, given previously seen input-output values. 
 
@@ -194,7 +194,69 @@ Bootstraping to compute the std error and CI's
     + These should be normally distributed.
 - Can also plot the distribution of sample means
 
+### Covariance matricies:
+- i,j<sup>th</sup> component sum _= cov(i,j) = mean(x<sub>i</sub>, x<sub>j</sub>) - mean(x<sub>i</sub>) * mean(x<sub>j</sub>)_, a measure of how much i and j co-vary.
+    + σ<sup>2</sup><sub>i</sub> = var(x) = cov(i,j)
+    + corr(i,j) = cov(i,j) / (σ<sub>i</sub> * σ<sub>j</sub>) 
+
+### Geometry of covarience matrices:
+- Volume: how widely spread the contours are
+- Shape: how circular/spherical the contours are
+- Orientation: the direction of the contours
+
+$$ IMAGE HERE
+
+image source: https://i.stack.imgur.com/E1XbL.png
+
 ### Features of Model Based Clustering:
 As the clustering isn't based on proximity of clusters/points, or on density, the clusterings aren't necessary uniform or visually "logical"
 
+
 # Networks and Connectivity
+### Measures of Connectivity:
+- Spectral Clustering: opperates on the principle of points being "connected", rather than them being "close" to one another.
+- Connectedness: the principle of being able to traverse along a network's edges, to get between two nodes/verticies.
+- Adjacency Matrix (A): encodes the information about which nodes are connected to which other nodes; _A<sub>i,j</sub> == 1_ if the verticies _i & j_ are connected, and _== 0 otherwise_.
+
+                (1)         
+               /   \            [0, 1, 1]
+              /     \       A = [1, 0, 1]
+            (3) ---- (2)        [1, 1, 0]
+
+- The graph Laplachin (L) connects along the diagnonal; L<sub>ii</sub> = -(no. of edges coming from node i). Using this, we can find connected clusters: if the vertex is in in a column, then _C<sup>i</sub>==1_, otherwise _C<sup>i</sub>==0_
+
+                (1)         
+                   \            [-1, 1,  0]
+                    \       L = [1, -1,  0]
+            (3)     (2)         [0,  0,  0]
+
+C<sub>1</sub> = [1,1,0]<sup>T</sup>, C<sub>2</sub> = [0,0,1]<sup>T</sup>. In cluster one, vertices 1 & 2 are connected, but vertex 3 is not. The opposite is true for cluster two.
+
+### Generalising A and L:
+__Affinity Matricies:__
+_A<sub>i,j</sub> = k(x<sub>i</sub>, x<sub>j</sub>)_, where _k_ is a kernel function, represents a modified adjacency matrix, referred to as an affinity matrix.
+
+_L<sub>i,i</sub> = A<sub>i,i</sub> - sum<sub>j</sub>(k(x<sub>i</sub>, x<sub>j</sub>))_
+
+### Spectral Clustering Process:
+- Choose a kernel function
+- General graph Laplachin
+- Find the columnwise vectors _C<sub>1</sub>, C<sub>2</sub>, ..., C<sub>m</sub>_, such that intracluster Laplachins are 0, and there are less clusters than vertices _(m < n)_
+- Preform kMeans clustering on the binary columnwise vectors _C_
+
+### Neighbourhoods Ν(i)
+Things near a point (i), can be defined either as the k-closest points to i, or those points within a distance from i.
+
+__Isometric feature mapping: isomap__
+These measure dissimilarity _d<sub>i,j</sub>_ between the points _i_ and _j_. 
+
+__Process:__
+1. define a neighbourhood metric
+2. create a network by connecting edges between points and those within their neighbourhood
+3. compute the dissimilarity _d<sub>i,j</sub>_, by _sum(dissimilarity)_ along the shortest path between points _i_ and _j_
+4. Apply Multi-dimensional-scaling maintaining _d<sub>i,j</sub>_, with a specified number of new embedded dimensions.
+
+__Local Linear Embedding:__
+1. define a neighbourhood metric
+2. find an approximation of each point using the weighted sum of their neighbours
+3. using these weights, find the coordinates Z<sub>i</sub> which satisfy approximations in a pre-determined lower dimension space.
