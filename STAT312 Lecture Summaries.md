@@ -204,7 +204,7 @@ Bootstraping to compute the std error and CI's
 - Shape: how circular/spherical the contours are
 - Orientation: the direction of the contours
 
-$$ IMAGE HERE
+![E1XbL](https://user-images.githubusercontent.com/80669114/139516478-1656fe22-56e7-4da5-b4fa-533a629153d0.png)
 
 image source: https://i.stack.imgur.com/E1XbL.png
 
