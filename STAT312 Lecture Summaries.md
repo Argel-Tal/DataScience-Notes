@@ -325,5 +325,19 @@ __Example Kernel functions - _k(x<sub>i</sub>, x<sub>j</sub>)_:__
 ### Multiclassification vs Binary Classification:
 In __[1 : 1]__ classification a classifier is created for each class, so for _k_ classes, each class is compared against _k-1_ classifiers, creating _(1/2) * k(k-1)_ classifier comparisions overall.
 
-For __[1 : all]__ classification we fit k SVM's and compare one class (+1) against the rest, which are all pooled together (-1). Instances are then classified as belonging to the class who's classifier they scored highest on _("softmax")_.
+For __[1 : all]__ classification we fit k SVM's and compare one class (+1) against the rest, which are all pooled together (-1). Instances are then classified as belonging to the class who's classifier they scored highest on.
+
+# Logistic Regression:
+Logisitic Regression is binary classification where _p<sub>1</sub> = p_ is the probability of an instance belonging to class 1, and _p<sub>0</sub> = 1 - p_ is the probability of the instance belonging to the opposite class.
+
+As this is deterministic, we can draw a classifier boundary through several dimensions: _η(x) = 0_
+
+### Multiclass Logistic Regression: 
+With _k_ classes, for _k = 1, 2, k-1_ we use 
+- _p<sub>k</sub> = p<sub>0</sub> * exp(η<sub>k</sub>(x))_
+- p<sub>0</sub> = 1 / (exp(η<sub>1</sub>(x) + exp(η<sub>2</sub>(x) + ... + exp(η<sub>k-1</sub>(x)))
+
+Class 0 is the baseline class, used as a reference point. From there we allocate the instances to the classes who they have the highest probability of belonging to (_"softmax"_). For _k_ classes, there will be _k_ values, each corresponding to a class, where the sum of those values = 1:
+- σ(z)<sub>k</sub> = 
+- p<sub>k</sub> = σ(1, η<sub>1</sub>, η<sub>2</sub>, ..., η<sub>k-1</sub>)<sub>k</sub>
 
