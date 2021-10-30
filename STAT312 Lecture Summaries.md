@@ -280,22 +280,50 @@ $$ GAP IMAGE HERE
 Image source: _http://www.sthda.com/sthda/RDoc/figure/clustering/determining-the-number-of-clusters-gap-statistic-k-means-1.png_
 
 ### Silhuette Score; Clustering evaluation
-metric  | definition
---------|-----------
-`a(i)`  | the average dissimilarity of an instance (i) to all observations in a given cluster
-`b(i)`  | the average dissimilarity of an instance (i) to all observations in all other clusters
+metric                                 | definition
+---------------------------------------|-----------
+`a(i)`                                 | the average dissimilarity of an instance (i) to all observations in a given cluster
+`b(i)`                                 | the average dissimilarity of an instance (i) to all observations in all other clusters
 `s(i) = (b(i)-a(i)) / max{a(i), b(i)}` | bounded `[-1,+1]`, where `+1` is ideal
-`S = (1/n) * sum(s(i))` | Silhuette score
+`S = (1/n) * sum(s(i))`                | Silhuette score
 
 # Hyperplane clustering and Support Vectors:
 ### Maximal Margin Classifiers:
 The maximal margin classifier is the hyperplane which provides optimal class seperation. The _"margin"_ is defined as the minimum distance of an observation to the dividing hyperplane.
 
-Ideally, we want to maximise the "non-man's land", created by the margin, between classes that are split by the hyperplane.
+Ideally, we want to maximise the "no-man's land", created by the margin, between classes that are split by the hyperplane.
 
 This requires scaling, such that all dimensions are on the same scale, and so we can use distance metrics. 
 
-The instances which inform the margin are refered to as _"support vectors"_, as they are vectors of length p, and which support the creation of the margin.
+The instances which inform the margin are refered to as _"support vectors"_, as they are vectors of length p, and which support the creation of the margin:
 
+### Support Vectors:
+Support vector based classifiers allow for a soft-margin, where a small number of instances are allowed to fall on the wrong side of the margin/hyperplane. 
 
+The degree to which instances are allowed to cross the margin/hyperplane is determined by the tuning parameter _C_, which is the cost of incorrect classifiations/margin-violations. 
+A higher C will produce a model which is more tolerant of misclassification (_1/C_).
+
+The evaluation of a given plane is done by summing the classification error ε<sub>i</sub>, and testing that against C; _sum(ε<sub>i</sub>) ≤ C_ , where ε<sub>i</sub> is defined as follows:
+
+value                   | condition
+------------------------|-----------
+ε<sub>i</sub> = 0       | instance is on the correct side of BOTH the classifier plane AND the margin
+0 < ε<sub>i</sub> < 1   | instance is on the correct side of the hyperplane, but within the margin
+1 < ε<sub>i</sub>       | instance is on the WRONG side of the hyperplane, ε<sub>i</sub> increases as it moves AWAY from the hyperplane
+
+If the sum comparison against C holds, then the hyperplane is valid.
+
+### Defining the hyperplane:
+The hyperplane is defined as _f(x) = B<sub>0</sub> + sum(α * k(x<sub>i</sub>, x<sub>j</sub>))_, where _k(x<sub>i</sub>, x<sub>j</sub>)_ is a kernel function, allowing us to create non-linear hyperplanes.
+
+__Example Kernel functions - _k(x<sub>i</sub>, x<sub>j</sub>)_:__
+1. Linear: inner product _(x<sub>i</sub> ⋅ x<sub>j</sub>)_
+2. Polynomial: _(C = γ * x<sub>i</sub> ⋅ x<sub>j</sub>) <sup>d</sup>_, where _d>1_ and _C_ is a tuning parameter
+3. Gaussian radial: _exp(-γ * | x<sub>i</sub> - x<sub>j</sub> | <sup>2</sup>)_
+4. Laplachin: _exp(-γ * | x<sub>i</sub> - x<sub>j</sub> |)_
+
+### Multiclassification vs Binary Classification:
+In __[1 : 1]__ classification a classifier is created for each class, so for _k_ classes, each class is compared against _k-1_ classifiers, creating _(1/2) * k(k-1)_ classifier comparisions overall.
+
+For __[1 : all]__ classification we fit k SVM's and compare one class (+1) against the rest, which are all pooled together (-1). Instances are then classified as belonging to the class who's classifier they scored highest on _("softmax")_.
 
