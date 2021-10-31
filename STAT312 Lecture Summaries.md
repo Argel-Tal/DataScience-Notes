@@ -340,3 +340,49 @@ Class 0 is the baseline class, used as a reference point. From there we allocate
 - σ(z)<sub>k</sub> = 
 - p<sub>k</sub> = σ(1, η<sub>1</sub>, η<sub>2</sub>, ..., η<sub>k-1</sub>)<sub>k</sub>
 
+# Evaluating model preformance: 
+### Overfitting:
+Machine learning models are essentially trying to memorise a dataset, subject to some constraints. In an ideal world, we would have all the data, and thus not need to create predictive/assumption based rules, we would just find a matching previously seen case. 
+
+Our models will do this, if given enough freedom and flexibility. To prevent this memorisation and overfitting, we need to do early stop or penalisation. These constraining pressures force our models to develop useful predictive rules, which allow us to generalise onto previously unseen data.
+
+We want to ensure that the error within our sample matches that of the wider population (out of sample error). Do do this, we reserve some data for training validation, called the _"testing"_ subset.
+
+__"Bias:"__ model's reliance on existing samples, and the inaccuracy on previously unseen data: high bias is associated with poor preformance, __underfitting__.
+
+__"Variance:"__ model's sensitivity to changes in the dataset -> how "jumpy"/noisey the model is
+
+### Components of model assessments:
+- cross model comparisons
+- cross dataset comparisons (testing and training data splits)
+- sensitivity analysis; how the model changes when it's inputs change __covered further in lecture 25__
+
+### Regression Metrics:
+- Mean Squared Error
+- Root Mean Squared Error
+- Mean Absolute Error
+- Root Relative Squared Error
+- Coefficient of determination (R<sup>2</sup>)
+
+### Classification Metrics:
+- Confusion matrix [on target vs off target classifications]
+- ROC
+- Entropy: measurement of uncertainty
+
+### Classification Problems: Misclassification - Is the cost of one type of error higher than another?
+
+![image](https://user-images.githubusercontent.com/80669114/137656718-e41979e3-f6eb-4103-a61b-12de3e438a7b.png)
+
+_source: https://2.bp.blogspot.com/-EvSXDotTOwc/XMfeOGZ-CVI/AAAAAAAAEiE/oePFfvhfOQM11dgRn9FkPxlegCXbgOF4QCLcBGAs/s1600/confusionMatrxiUpdated.jpg_
+
+- __Precision__ PPV: Of the posititve predictions, how many are true? `TP/(TP+FP)`
+- __Sensitivity/Recall__ TPR: what proportion of the positive predictions were actaully positive `TP/(TP+FN)`
+- __Specificity__ TNR: what proportion of the true negatives have we correctly identified? `TN/(TN+FP)`
+- __False Discovery Rate__ FDR: What is the ratio of false positive to all positive predictions `FP/(FP+TP)`
+- __F score__: `2 / ((1/precision) + (1/recall))`
+- __Receiver Operator Curves__, ROC: Binary classification - True Positive Rate relative to False Positive Rate, and where cut points will cause FNs and FPs
+- __AUC curves__: shows the area underneath the ROC curves - ideally will be a horizontal asymptote, not a positive diagonal (given by random allocation)
+
+No overlap, so no misclassification | Some overlap and misclassification
+------------------------------------|--------------
+![Screenshot (1140)](https://user-images.githubusercontent.com/80669114/137035836-91e820d0-4a12-4ac3-87b7-61137f3a024a.png) | ![Screenshot (1141)](https://user-images.githubusercontent.com/80669114/137035926-98c481c7-5839-4265-982e-8735a0fd38c5.png)
