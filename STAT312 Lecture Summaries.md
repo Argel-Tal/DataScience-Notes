@@ -340,6 +340,37 @@ Class 0 is the baseline class, used as a reference point. From there we allocate
 - σ(z)<sub>k</sub> = 
 - p<sub>k</sub> = σ(1, η<sub>1</sub>, η<sub>2</sub>, ..., η<sub>k-1</sub>)<sub>k</sub>
 
+# Linear Regression
+### Multiple Linear Regression:
+- single predictor:     `yhat = w[0]*x[0] + b`
+- multiple predictors:  `yhat = w[0]*x[0] + w[1]*x[1] + ... + w[p]*x[p] + b`
+- polynomial predictors: `yhat` = Θ<sub>0</sub> `+ sum`(Θ<sub>i</sub> * z<sub>i</sub>), where z = [x<sub>1</sub>, x<sub>2</sub>, x<sub>1</sub>x<sub>2</sub>, x<sub>1</sub><sup>2</sup>...]
+
+This essentially gives the output as a weighted sum function, where weights are applied to each of the explanatory variables.
+
+The weight and offset (`b`) values are chosen such that they reduce the mean-square-error (MSE).
+These can be set at different levels for each instance; 
+- Random slope: different weight levels for each instance, will produce a different curve
+- Random offset: different offset/error term for each instance, will set the origin at a different point
+
+### Penalised Linear Regression:
+__Lasso Regression - L1:__
+Weights are penalised such that some weights are force to be exactly 0, ensuring we only have the predictors that are asboutely necessary. This provides a form of implicit variable selection. As such, lasos is preferable over ridge regression for datasets that are highly dimensional
+
+The degree of penalisation is controlled by the alpha term: `α`, where higher `α` pushes a greater amount of weights to be == 0
+
+Lasso regression function: `yhat = α[0]*w[0]*x[0] + α[1]*w[1]*x[1] + ... + α[p]*w[p]*x[p] + b`
+
+__Ridge Regression - L2:__
+Weights are penalised such that higher values are penalised more, promoting weights to have a low value, close to 0, thus influencing the slope as little as possible. This helps to prevent terms from having unnecessarily outsized values, where other predictor's have weights to cancel out the affects of the outsized ones.
+
+The degree of penalisation is controlled by the alpha term: `α`, where higher `α` gives greater penalisation
+
+Ridge regression function: `yhat = α[0]*w[0]*x[0] + α[1]*w[1]*x[1] + ... + α[p]*w[p]*x[p] + b`
+
+__Elastic Net:__
+An elastic net essentially merges the penalisation of both Lasso and Ridge regression into one equation. The proportion of which penalisation term is applied is controlled through a hyper parameter, which splits the penalisation between [0:1] such that `prop(L1) + prop(L2) == 1`
+
 # Evaluating model preformance: 
 ### Overfitting:
 Machine learning models are essentially trying to memorise a dataset, subject to some constraints. In an ideal world, we would have all the data, and thus not need to create predictive/assumption based rules, we would just find a matching previously seen case. 
