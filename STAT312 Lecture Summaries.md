@@ -274,7 +274,7 @@ _gap(k)_ | _= (1/B) * sum(log(w<sup>b</sup><sub>k</sub> - log(w<sub>k</sub>)))_ 
 
 - with _k* < k_ the clusters are becoming more uniform, and thus the gap statistic will fall off.
 
-$$ GAP IMAGE HERE
+![image](https://user-images.githubusercontent.com/80669114/139561539-59411f68-d0bd-4297-8b4d-02be40dc23e6.png)
 
 Image source: _http://www.sthda.com/sthda/RDoc/figure/clustering/determining-the-number-of-clusters-gap-statistic-k-means-1.png_
 
