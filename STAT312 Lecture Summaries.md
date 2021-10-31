@@ -367,7 +367,8 @@ __"Variance:"__ model's sensitivity to changes in the dataset -> how "jumpy"/noi
 ### Classification Metrics:
 - Confusion matrix [on target vs off target classifications]
 - ROC
-- Entropy: measurement of uncertainty
+- AUC
+- Entropy/Deviance: measurement of uncertainty
 
 ### Classification Problems: Misclassification - Is the cost of one type of error higher than another?
 
@@ -386,3 +387,14 @@ _source: https://2.bp.blogspot.com/-EvSXDotTOwc/XMfeOGZ-CVI/AAAAAAAAEiE/oePFfvhf
 No overlap, so no misclassification | Some overlap and misclassification
 ------------------------------------|--------------
 ![Screenshot (1140)](https://user-images.githubusercontent.com/80669114/137035836-91e820d0-4a12-4ac3-87b7-61137f3a024a.png) | ![Screenshot (1141)](https://user-images.githubusercontent.com/80669114/137035926-98c481c7-5839-4265-982e-8735a0fd38c5.png)
+
+# Classical Statistics vs High Dimensional Data
+Methods like Least Squares preform poorly in high dimensional spaces, given the over abundance of parameters to fit on, and the increasing likelihood of a point being an outlier in at least one dimension. Thus, the models produced using these methods will be prone to overfitting.
+The core issue of this is _"noise"_, it gets harder to isolate meaningful information from random noise as dimensions are added. 
+
+Further, it becomes increasingly likely that we could overlook important variables, interpretting them as combaintions of other variables; detecting spirulus correlations.
+
+### Binary classiciation problems:
+- Deviance = _-sum(Y<sub>i</sub> * log (π<sub>i</sub>) + (1 - Y<sub>i</sub>) * log(1 - π<sub>i</sub>))_, where Y<sub>i</sub> == 1 if π<sub>i</sub> >= t, and Y<sub>i</sub> == 0 if π<sub>i</sub> < t
+    + typically t==0.5, but if the cost of False Positives =/= the cost of False Negatives, this can be modified to respect the cost imbalance.
+- Misclassification = sum(Y<sub>i</sub> =/= est(Y<sub>i</sub>))
