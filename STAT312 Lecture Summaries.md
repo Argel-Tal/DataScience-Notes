@@ -398,3 +398,13 @@ Further, it becomes increasingly likely that we could overlook important variabl
 - Deviance = _-sum(Y<sub>i</sub> * log (π<sub>i</sub>) + (1 - Y<sub>i</sub>) * log(1 - π<sub>i</sub>))_, where Y<sub>i</sub> == 1 if π<sub>i</sub> >= t, and Y<sub>i</sub> == 0 if π<sub>i</sub> < t
     + typically t==0.5, but if the cost of False Positives =/= the cost of False Negatives, this can be modified to respect the cost imbalance.
 - Misclassification = sum(Y<sub>i</sub> =/= est(Y<sub>i</sub>))
+
+
+# Generalised Additive Models (GAMs):
+Y<sub>i</sub> = β<sub>0</sub> + sum(f<sub>j</sub>(X<sub>i,j</sub>)) + ε<sub>i</sub>, where f<sub>j</sub> are non-linear functions of a single variable.
+
+This allows us to fit non-linear functions to each feature, without needing to manually apply transformations.
+The model being "additive" also allows us to preform "change in x[,j], holding x[,-j] constant" type assessments.
+
+GAMs are the generalised format, which contains Splines.
+- Natural Splines: defined by the restriction that their 2nd derivative == 0. _d<sup>2</sup>/dx<sup>2</sup> = 0_
