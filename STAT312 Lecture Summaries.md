@@ -119,7 +119,7 @@ The loading is expected to fall in the domain `[-1,+1]`
 # Linear Discriminant Analysis (LDA):
 ### Purpose: 
 Can we know something about the values and features, given the allocation of instances into predetermined classes.
-Uses a class dependant covariance matrix to create meaningful variables.
+Uses a __class independant covariance matrix__ to create meaningful variables.
 _f<sub>c</sub>(x) = P(x|Y=c)_
 
 ### Requirements:
