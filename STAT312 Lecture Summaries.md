@@ -498,6 +498,8 @@ Bootstrap aggregation, averaging a set of observations to reduce the variation i
 We take B bootstrapped versions of the dataset from our training dataset, and build a decision tree on each. This produces B trees.
 While this boosts preformance, we loose the advantage of trees being easy to interpret
 
+The out-of-bag error or OOB error is the error on those instances not present within each of the booststrapped dists. A typical bootstrapped sample will involve 2/3 of the instances, and the remaining 1/3 are _"out-of-bag observations"_
+
 #### Boosting
 Growing many small trees that act in sequence, with each tree reducing the residual error passed to it from the previous tree. Each of these trees have a highly limited max depth. This is a form of __Stacking__, with the caveat that all stacked models are of the same type.
 
