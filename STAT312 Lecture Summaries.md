@@ -215,7 +215,6 @@ As the clustering isn't based on proximity of clusters/points, or on density, th
 Each instance has a probability of assignment  to each cluster. 
 Typically it uses BIC and Integrated Complete-data Likelihood) to determine the optimal number of clusters
 
-
 # Networks and Connectivity
 ### Measures of Connectivity:
 - Spectral Clustering: opperates on the principle of points being "connected", rather than them being "close" to one another.
