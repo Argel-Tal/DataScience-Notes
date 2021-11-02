@@ -211,7 +211,9 @@ Bootstraping to compute the std error and CI's
 image source: https://i.stack.imgur.com/E1XbL.png
 
 ### Features of Model Based Clustering:
-As the clustering isn't based on proximity of clusters/points, or on density, the clusterings aren't necessary uniform or visually "logical"
+As the clustering isn't based on proximity of clusters/points, or on density, the clusterings aren't necessary uniform or visually "logical".
+Each instance has a probability of assignment  to each cluster. 
+Typically it uses BIC and Integrated Complete-data Likelihood) to determine the optimal number of clusters
 
 
 # Networks and Connectivity
