@@ -22,7 +22,6 @@ Examples:
 1. Kruskal's non-metric NDS (isoMDS)
 2. Sammon's non-linear MDS
 
-
 # Principal Component Analysis:
 ### Base Principal Component Analysis:
 __Purpose:__
@@ -114,7 +113,6 @@ F<sub>1</sub> is also a random variable, with a normal dist `μ = 0, σ = 1`, wh
 This allows each instance to be treated as an independent event/instance.
 
 The loading is expected to fall in the domain `[-1,+1]`
-
 
 # Linear Discriminant Analysis (LDA):
 ### Purpose: 
@@ -265,8 +263,13 @@ __Local Linear Embedding:__
 3. using these weights, find the coordinates Z<sub>i</sub> which satisfy approximations in a pre-determined lower dimension space.
 
 # Selecting Cluster Counts
+There is an elbow in the graph of total _within-cluster variation_ at K = K*, which requires human interpretation to make the determination
+_Gap_ automates finding the elbow by comparing the total within-cluster variation for the data versus the same for data bootstrapped from a reference/null distribution.
+Silhouette determines how well each observation is clustered within its cluster _[+1 for good, -1 for bad where there is another cluster that the observation is closer to]_. Averaging over all observations gives the silhouette score, which we seek to maximise.
+
+### Elbow:
 Plotting intracluster variation, we should see a rapid decrease in variance as clusters increase, however the gradient of this decrease should rapidly fall off to near horizontal. This will have an "elbow" point, where our optimal number of clusters is achieved, before we risk overfitting.
-### Gap Statistic
+### Gap Statistic:
 The Gap Statistic is an attempt at automatically locating the optimal number of clusters (_no.clusters = k_), by measuring gradient change
 
 Statistic| Calculation | Definition
@@ -274,14 +277,13 @@ Statistic| Calculation | Definition
 _gap(k)_ | _= (1/B) * sum(log(w<sup>b</sup><sub>k</sub> - log(w<sub>k</sub>)))_ | The difference in the (log) total within cluster variation from the actual data vs the expected (log) within cluster variation from uniform/reference data.
 
 - with _current no.clusters (k) < ideal no.clusters (k*)_, the current clusters are likely to not be uniform in internal variance, so the gap statistic will grow rapidly
-
 - with _k* < k_ the clusters are becoming more uniform, and thus the gap statistic will fall off.
 
 ![image](https://user-images.githubusercontent.com/80669114/139561539-59411f68-d0bd-4297-8b4d-02be40dc23e6.png)
 
 Image source: _http://www.sthda.com/sthda/RDoc/figure/clustering/determining-the-number-of-clusters-gap-statistic-k-means-1.png_
 
-### Silhuette Score; Clustering evaluation
+### Silhuette Score; Clustering evaluation:
 metric                                 | definition
 ---------------------------------------|-----------
 `a(i)`                                 | the average dissimilarity of an instance (i) to all observations in a given cluster
