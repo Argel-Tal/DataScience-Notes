@@ -485,7 +485,17 @@ graphically simple  | small changes to the data can dramatically alter the tree 
 mirrors human decision making processes | prediction surfaces aren't smooth functions, but blocks
 can handle both regression and classification |
 
+### Dendrograms
+Dendrograms are a clustering tree, where _like_ instances are grouped into _nodes_, which are then merge with other nodes.
 
+The linkage metric can dramatically impact the structure of the resultant tree
+Linkage type    | Description
+----------------|-------------
+Complete        | mimimises the furthest distance possible from the two nodes' values (min of A, max of B)
+Average         | mimimises the difference in average (mean) value of each node
+Minimum         | mimimises the difference in minimum value of each node
+Maximum         | mimimises the difference in minimum value of each node
+Ward             | minimises the sum of squares variance increase when two clusters are merged
 
 ### Aggregate Models:
 #### Bagging
