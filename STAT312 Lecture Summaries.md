@@ -119,11 +119,12 @@ The loading is expected to fall in the domain `[-1,+1]`
 # Linear Discriminant Analysis (LDA):
 ### Purpose: 
 Can we know something about the values and features, given the allocation of instances into predetermined classes.
-Uses a class dependant covariance matrix to create meaningful variables.
+Uses a __class independant covariance matrix__ to create meaningful variables.
 _f<sub>c</sub>(x) = P(x|Y=c)_
 
 ### Requirements:
-- needs exclusively continuous predictors only
+- __needs exclusively continuous predictors only__
+- class-independent covariance matrix Σ: an EEE model
 - Posterior Probabilities: _p<sub>c</sub>(x) = π<sub>c</sub>f<sub>c</sub>(x) / Σ(π<sub>c</sub>f<sub>c</sub>(x))_
 - Prior Probabilities: _π<sub>c</sub> = P(Y=c)_
 
@@ -142,7 +143,7 @@ n estimated params  | c<sub>p</sub> + 1/2 * p(p+1) + C -1 | needs to be signific
     + source: https://www.researchgate.net/figure/Axes-1-and-2-from-linear-discriminant-analysis-LDA-based-on-17-brittle-stars_fig3_330571683
 
 # Quadratic Discriminant Analysis:
-Uses a class dependant covariance matrix to create meaningful variables.
+Uses a __class dependant covariance matrix__ to create meaningful variables.
 Instead of linear boundaries, QDA creates bounding curves
 
 ### Method:
@@ -151,6 +152,7 @@ Estimates _C<sub>p</sub> + (1/2) + C<sub>p</sub>(p+1) + C - 1_ parameters, which
 ### Requirements:
 - no.params < n
 - _(1/2)*p(p + 1)_ < the number of instances in the clusters
+- class-dependent covariance matrix Σc: a VVV model
 
 # Independant Component Analysis:
 Assuming that X = n.p is a matrix of indpendant signals; _S<sub>1</sub>, S<sub>2</sub>, ... , S<sub>p</sub>_, we can define the matrix as:
@@ -505,6 +507,8 @@ Bootstrap aggregation, averaging a set of observations to reduce the variation i
 
 We take B bootstrapped versions of the dataset from our training dataset, and build a decision tree on each. This produces B trees.
 While this boosts preformance, we loose the advantage of trees being easy to interpret
+
+The out-of-bag error or OOB error is the error on those instances not present within each of the booststrapped dists. A typical bootstrapped sample will involve 2/3 of the instances, and the remaining 1/3 are _"out-of-bag observations"_
 
 #### Boosting
 Growing many small trees that act in sequence, with each tree reducing the residual error passed to it from the previous tree. Each of these trees have a highly limited max depth. This is a form of __Stacking__, with the caveat that all stacked models are of the same type.
